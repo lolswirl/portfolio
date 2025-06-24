@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://site.com
+base_url = "https://site.com"
 
 title = "swirl."
 theme = "apollo"
@@ -26,6 +26,11 @@ fancy_code = true
 dynamic_node = true
 toc = true
 use_cdn = true
+repo_url = "https://github.com/lolswirl/site/"
+
+socials = [
+  { name = "github", url = "https://github.com/lolswirl/", icon = "github" },
+]
 
 menu = [
   { name = "/posts", url = "/posts", weight = 1 },
