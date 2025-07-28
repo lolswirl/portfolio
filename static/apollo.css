@@ -58,6 +58,19 @@ a {
   color: var(--hover-color) !important;
 }
 
+.social-tooltip {
+  background-color: var(--bg-2);
+  color: var(--text-0);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: var(--text-font);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 :root.dark {
   --primary-color: #73ff48;
   --secondary-color: #5ac539;
