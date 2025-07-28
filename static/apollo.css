@@ -39,6 +39,10 @@ a {
   border-radius: 0 !important;
 }
 
+.page-header {
+  text-transform: lowercase;
+}
+
 .page-header::after {
   content: ".";
   color: var(--primary-color);
