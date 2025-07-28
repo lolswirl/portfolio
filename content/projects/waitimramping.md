@@ -4,7 +4,6 @@ description = "site full of tools to help world of warcraft healers plan, visual
 weight = 1
 
 [extra]
-local_image = "/projects/waitimramping.png"
-# remote_image = "url"
-link_to = "https://waitimramping.vercel.app"
+remote_image = "https://www.waitimramping.com/previews/timeline.png"
+link_to = "https://www.waitimramping.com"
 +++
