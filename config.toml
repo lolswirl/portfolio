@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://im-swirl.vercel.app"
+base_url = "https://rshevchenko.com"
 
 title = "swirl."
 theme = "apollo"
