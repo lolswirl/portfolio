@@ -28,6 +28,10 @@ toc = true
 use_cdn = true
 repo_url = "https://github.com/lolswirl/site/"
 
+stylesheets = [
+  "apollo.css"
+]
+
 socials = [
   { name = "github", url = "https://github.com/lolswirl/", icon = "github" },
   { name = "discord", url = "https://discord.com/users/188815794929401856", icon = "discord" },

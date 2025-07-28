@@ -1,0 +1,69 @@
+:root {
+  --font-size-base: 13.5px;
+  --mono-text-font: "Jetbrains Mono";
+  --text-font: "Jetbrains Mono";
+  --header-font: "Space Grotesk", "Helvetica", sans-serif;
+  --code-font: "Jetbrains Mono";
+  
+  --line-height: 1.5;
+  --page-width: 920px;
+}
+
+html {
+  font-family: var(--text-font) !important;
+  line-height: var(--line-height) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--header-font) !important;
+}
+
+code, pre, .code {
+  font-family: var(--code-font) !important;
+}
+
+a {
+  border-bottom: 3px solid var(--primary-color);
+
+  &:hover {
+    background-color: var(--secondary-color);
+    color: var(--hover-color);
+  }
+    
+  &:has(img) {
+    border-bottom: none;
+  }
+}
+
+.socials img, .social img {
+  border-radius: 0 !important;
+}
+
+.page-header::after {
+  content: ".";
+  color: var(--primary-color);
+  font-size: 1.6em;
+}
+
+.right-nav a {
+  margin-right: 0.2em !important;
+}
+
+.socials a:hover {
+  background-color: var(--primary-color) !important;
+  color: var(--hover-color) !important;
+}
+
+:root.dark {
+  --primary-color: #73ff48;
+  --secondary-color: #5ac539;
+}
+
+:root.light {
+  --primary-color: #fb607f;
+  --secondary-color: #fb607f;
+}
+
+::selection {
+  background: var(--secondary-color);
+}
