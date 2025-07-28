@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://site.com"
+base_url = "https://im-swirl.vercel.app"
 
 title = "swirl."
 theme = "apollo"
@@ -30,6 +30,10 @@ repo_url = "https://github.com/lolswirl/site/"
 
 socials = [
   { name = "github", url = "https://github.com/lolswirl/", icon = "github" },
+  { name = "discord", url = "https://discord.com/users/188815794929401856", icon = "discord" },
+  { name = "twitch", url = "https://www.twitch.tv/lolswirl", icon = "twitch" },  
+  { name = "twitter", url = "https://twitter.com/seismically", icon = "twitter" },
+  { name = "linkedin", url = "https://www.linkedin.com/in/ronald-shevchenko/", icon = "linkedin" }, 
 ]
 
 menu = [
