@@ -1,9 +1,9 @@
 +++
-title= "hi, i'm swirl"
+title= "hi, i'm ronald"
 template = "homepage.html"
 +++
 
-i'm known by my moniker, _swirl_, but my name is _ronald_.  
+i'm also known by my moniker, _swirl_, but my name is _ronald_.  
 professionally, i'm a backend developer with a love for all things tech.  
 though i'm primarily involved in backend technologies, i've been pursuing frontend ux as a hobby for years.
 
