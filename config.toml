@@ -19,7 +19,7 @@ index_format = "elasticlunr_json"
 highlight_code = true
 
 [extra]
-theme = "toggle"
+theme = "toggle-auto"
 favicon = "/icons/favicon.svg"
 fancy_code = true
 dynamic_node = true
