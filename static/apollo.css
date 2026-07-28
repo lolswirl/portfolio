@@ -22,6 +22,22 @@ code, pre, .code {
   font-family: var(--code-font) !important;
 }
 
+body {
+  text-transform: lowercase;
+}
+
+code, pre, kbd, samp, .code, #results {
+  text-transform: none;
+}
+
+.toc li, .toc a {
+  font-family: var(--text-font);
+}
+
+.toc .heading {
+  font-family: var(--header-font);
+}
+
 a {
   border-bottom: 3px solid var(--primary-color);
 
