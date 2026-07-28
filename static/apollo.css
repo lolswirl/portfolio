@@ -38,6 +38,11 @@ code, pre, kbd, samp, .code, #results {
   font-family: var(--header-font);
 }
 
+.accent {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
 a {
   border-bottom: 3px solid var(--primary-color);
 
