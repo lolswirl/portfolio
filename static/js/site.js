@@ -1,4 +1,4 @@
-document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+document.querySelector(".theme-toggle").addEventListener("click", toggleTheme);
 
 // collapsible notes
 document.querySelectorAll(".note-toggle").forEach(function (button) {

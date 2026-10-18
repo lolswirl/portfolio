@@ -110,7 +110,7 @@ nav {
 }
 
 .socials img,
-#theme-toggle img {
+.theme-toggle img {
   display: block;
   width: 16px;
   height: 16px;
@@ -122,20 +122,20 @@ nav {
   background-color: var(--primary-color);
 }
 
-#theme-toggle {
+.theme-toggle {
   background: none;
   border: none;
   padding: 0.1rem;
   cursor: pointer;
 }
 
-#theme-toggle img {
+.theme-toggle img {
   display: none;
 }
 
-:root[data-theme-mode="light"] #theme-toggle [data-mode="light"],
-:root[data-theme-mode="dark"] #theme-toggle [data-mode="dark"],
-:root[data-theme-mode="auto"] #theme-toggle [data-mode="auto"] {
+:root[data-theme-mode="light"] .theme-toggle [data-mode="light"],
+:root[data-theme-mode="dark"] .theme-toggle [data-mode="dark"],
+:root[data-theme-mode="auto"] .theme-toggle [data-mode="auto"] {
   display: block;
 }
 
