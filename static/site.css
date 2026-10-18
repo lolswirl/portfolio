@@ -276,18 +276,47 @@ time,
   color: var(--text-1);
 }
 
+/* page metadata as a key/value grid: dim labels, values beside them */
 .meta {
+  display: grid;
+  grid-template-columns: 6ch 1fr;
+  gap: 0.15rem 1ch;
+}
+
+.meta .k {
+  color: var(--text-2);
+}
+
+.meta .v {
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.5em;
 }
 
-.meta.links {
-  margin-top: 0.4rem;
+/* metadata links: thin accent underline so they read as clickable without
+   competing with links in the article */
+.meta a {
+  border-bottom: 1px solid var(--primary-color);
 }
 
-.meta a {
-  border-bottom-width: 1px;
+.meta .tag::before {
+  content: "#";
+  color: var(--primary-color);
+}
+
+.meta .ext::after {
+  content: " ↗";
+  color: var(--primary-color);
+}
+
+.meta a:hover::before,
+.meta a:hover::after {
+  color: inherit;
+}
+
+/* room between the metadata and the article */
+.meta + .body {
+  margin-top: 1.5rem;
 }
 
 /* the back link lives inside the header's 3rem top gap, so titles line up across pages */

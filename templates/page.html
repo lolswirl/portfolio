@@ -6,26 +6,35 @@
         <a class="back" href="{{ config.base_url }}">← home</a>
         <h1 class="page-header">{{ page.title }}</h1>
 
-        {% if page.date or page.extra?.read_time or page.taxonomies?.tags %}
+        {% set has_links = page.extra?.card_links or page.extra?.github %}
+        {% if page.date or page.extra?.read_time or page.taxonomies?.tags or has_links %}
             <div class="meta">
-                {% if page.date %}<time>{{ page.date | date(format="%Y-%m-%d") }}</time>{% endif %}
-                {% if page.extra?.read_time %}<span>:: {{ page.reading_time }} min read</span>{% endif %}
-                {% if page.taxonomies?.tags %}
-                    <span>::</span>
-                    {% for tag in page.taxonomies.tags | sort %}
-                        <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}">#{{ tag }}</a>
-                    {% endfor %}
+                {% if page.date %}
+                    <span class="k">date</span>
+                    <span class="v"><time>{{ page.date | date(format="%b %Y") }}</time></span>
                 {% endif %}
-            </div>
-        {% endif %}
-
-        {% if page.extra?.card_links or page.extra?.github %}
-            <div class="meta links">
-                {% for link in page.extra?.card_links | default(value=[]) %}
-                    <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.text }} ↗</a>
-                {% endfor %}
-                {% if page.extra?.github %}
-                    <a href="{{ page.extra.github }}" target="_blank" rel="noopener">github ↗</a>
+                {% if page.extra?.read_time %}
+                    <span class="k">read</span>
+                    <span class="v">{{ page.reading_time }} min</span>
+                {% endif %}
+                {% if page.taxonomies?.tags %}
+                    <span class="k">tags</span>
+                    <span class="v">
+                        {% for tag in page.taxonomies.tags | sort %}
+                            <a class="tag" href="{{ get_taxonomy_url(kind='tags', term=tag) }}">{{ tag }}</a>
+                        {% endfor %}
+                    </span>
+                {% endif %}
+                {% if has_links %}
+                    <span class="k">links</span>
+                    <span class="v">
+                        {% for link in page.extra?.card_links | default(value=[]) %}
+                            <a class="ext" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.text }}</a>
+                        {% endfor %}
+                        {% if page.extra?.github %}
+                            <a class="ext" href="{{ page.extra.github }}" target="_blank" rel="noopener">github</a>
+                        {% endif %}
+                    </span>
                 {% endif %}
             </div>
         {% endif %}
