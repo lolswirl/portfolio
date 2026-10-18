@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<main>
+    <a class="back" href="{{ config.base_url }}">← home</a>
+    <h1 class="page-header">{{ taxonomy.name }}</h1>
+    <ul class="rows">
+        {% for term in terms %}
+            <li class="row">
+                <a class="row-title" href="{{ term.permalink }}">#{{ term.name }}</a>
+                <span class="row-desc">{{ term.page_count }} page{{ term.page_count | pluralize }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock main_content %}

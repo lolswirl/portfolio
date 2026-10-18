@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<main>
+    <article>
+        <a class="back" href="{{ config.base_url }}">← home</a>
+        <h1 class="page-header">{{ page.title }}</h1>
+
+        <div class="meta">
+            {% if page.date %}<time>{{ page.date | date(format="%Y-%m-%d") }}</time>{% endif %}
+            {% if page.extra?.read_time %}<span>:: {{ page.reading_time }} min read</span>{% endif %}
+            {% if page.taxonomies?.tags %}
+                <span>::</span>
+                {% for tag in page.taxonomies.tags | sort %}
+                    <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}">#{{ tag }}</a>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% if page.extra?.card_links or page.extra?.github %}
+            <div class="meta links">
+                {% for link in page.extra?.card_links | default(value=[]) %}
+                    <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.text }} ↗</a>
+                {% endfor %}
+                {% if page.extra?.github %}
+                    <a href="{{ page.extra.github }}" target="_blank" rel="noopener">github ↗</a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <section class="body">
+            {{ page.content | safe }}
+        </section>
+    </article>
+</main>
+{% endblock main_content %}
+
+{% block right_content %}
+    {% if page.toc %}
+        <div class="toc">
+            <div class="heading">table of contents</div>
+            <ul>
+                {% for h in page.toc %}
+                    <li>
+                        <a href="{{ h.permalink | safe }}">{{ h.title }}</a>
+                        {% if h.children %}
+                            <ul>
+                                {% for c in h.children %}
+                                    <li><a href="{{ c.permalink | safe }}">{{ c.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock right_content %}

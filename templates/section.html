@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<main>
+    <a class="back" href="{{ config.base_url }}">← home</a>
+    <h1 class="page-header">{{ section.title }}</h1>
+    {% if section.content %}<div class="intro">{{ section.content | safe }}</div>{% endif %}
+    {{<site.entries pages={section.pages} />}}
+</main>
+{% endblock main_content %}

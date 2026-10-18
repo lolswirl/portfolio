@@ -17,18 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.style.display = 'block';
 
             const rect = link.getBoundingClientRect();
-            tooltip.style.left = rect.left + 'px';
-            tooltip.style.top = (rect.bottom + 5) + 'px';
+            tooltip.style.left = (rect.left + window.scrollX) + 'px';
+            tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
         });
-        
+
         link.addEventListener('mouseleave', function() {
             tooltip.style.display = 'none';
         });
         
         link.addEventListener('mousemove', function(e) {
             const rect = link.getBoundingClientRect();
-            tooltip.style.left = rect.left + 'px';
-            tooltip.style.top = (rect.bottom + 5) + 'px';
+            tooltip.style.left = (rect.left + window.scrollX) + 'px';
+            tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
         });
     });
 });

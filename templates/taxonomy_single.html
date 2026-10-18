@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<main>
+    <a class="back" href="{{ get_url(path='tags') }}">← tags</a>
+    <h1 class="page-header">#{{ term.name }}</h1>
+    {{<site.entries pages={term.pages} />}}
+</main>
+{% endblock main_content %}

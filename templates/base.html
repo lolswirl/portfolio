@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" data-delim="{{ config.extra.delimiter | default(value='a') }}" data-earlier="{{ config.extra.earlier_role | default(value='a') }}" data-marker="{{ config.extra.row_marker | default(value='') }}">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if page?.title %}
+        {% set title = page.title ~ " | " ~ config.title %}
+    {% elif section?.title and current_path != "/" %}
+        {% set title = section.title ~ " | " ~ config.title %}
+    {% else %}
+        {% set title = config.title %}
+    {% endif %}
+    <title>{{ title }}</title>
+    <meta property="og:title" content="{{ title }}" />
+    {% if page?.description %}
+        <meta name="description" content="{{ page.description }}" />
+        <meta property="og:description" content="{{ page.description }}" />
+    {% endif %}
+    <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon) }}" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@4.5.8/index.min.css" />
+
+    <link id="syntax-light" rel="stylesheet" href="{{ get_url(path='giallo-light.css') }}" />
+    <link id="syntax-dark" rel="stylesheet" href="{{ get_url(path='giallo-dark.css') }}" disabled />
+    <link rel="stylesheet" href="{{ get_url(path='site.css') }}" />
+
+    {# runs before first paint so the page never flashes the wrong theme #}
+    <script src="{{ get_url(path='js/theme.js') }}"></script>
+    <script defer src="{{ get_url(path='js/site.js') }}"></script>
+    <script defer src="{{ get_url(path='js/tooltips.js') }}"></script>
+</head>
+
+<body>
+    <div class="left-content"></div>
+
+    <div class="content">
+        <nav>
+            <div class="left-nav">
+                <a href="{{ config.base_url }}" class="home">{{ config.title }}</a>
+                <div class="socials">
+                    {% for social in config.extra.socials %}
+                        <a rel="me noopener" target="_blank" href="{{ social.url }}" class="social">
+                            <img alt="{{ social.name }}" src="{{ get_url(path='icons/social/' ~ social.icon ~ '.svg') }}" />
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="right-nav">
+                <button id="theme-toggle" type="button" title="toggle theme">
+                    <img src="{{ get_url(path='icons/sun.svg') }}" data-mode="light" alt="light" />
+                    <img src="{{ get_url(path='icons/moon.svg') }}" data-mode="dark" alt="dark" />
+                    <img src="{{ get_url(path='icons/auto.svg') }}" data-mode="auto" alt="auto" />
+                </button>
+            </div>
+        </nav>
+
+        {% block main_content %}{% endblock main_content %}
+    </div>
+
+    <div class="right-content">
+        {% block right_content %}{% endblock right_content %}
+    </div>
+</body>
+</html>

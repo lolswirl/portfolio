@@ -1,0 +1,25 @@
+{% component site.entry(page: map) %}
+{% set ext = "" %}
+{% if page.extra?.card_links %}
+    {% set ext = page.extra.card_links[0].url %}
+{% elif page.extra?.github %}
+    {% set ext = page.extra.github %}
+{% endif %}
+<li class="row">
+    <a class="row-title" href="{{ page.permalink }}">{{ page.title }}</a>
+    <span class="row-desc">{{ page.extra?.blurb | default(value=page.description | default(value="")) }}</span>
+    {% if ext %}<a class="row-ext" href="{{ ext }}" target="_blank" rel="noopener" title="{{ ext }}">↗</a>{% endif %}
+</li>
+{% endcomponent site.entry %}
+
+{% component site.entries(pages: array) %}
+{% if pages %}
+    <ul class="rows">
+        {% for page in pages %}
+            {{<site.entry page={page} />}}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p class="empty">nothing here yet.</p>
+{% endif %}
+{% endcomponent site.entries %}

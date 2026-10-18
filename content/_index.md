@@ -1,6 +1,5 @@
 +++
 title= "hi, i'm ronald"
-template = "homepage.html"
 +++
 
 i'm also known by my moniker, _swirl_, but my name is _ronald_.  

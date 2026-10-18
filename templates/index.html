@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<main class="home">
+    {# invisible twin of the subpages' back link, so every page title sits at the same height #}
+    <span class="back placeholder" aria-hidden="true">← home</span>
+    <h1 class="page-header">{{ section.title }}</h1>
+    <div class="intro">{{ section.content | safe }}</div>
+    {% if section.extra?.now %}<p class="now"><span class="now-label">now</span> {{ section.extra.now }}</p>{% endif %}
+
+    <h2 class="label">exp</h2>
+    <ul class="rows exp">
+        {% for job in section.extra?.exp | default(value=[]) %}
+            <li class="row">
+                <span class="row-title">{{ job.role }}</span>
+                <a class="row-desc company" href="{{ job.url }}" target="_blank" rel="noopener">
+                    {% if job.logo %}<img class="logo{% if job.mono_logo %} mono{% endif %}" src="{{ get_url(path=job.logo) }}" alt="" />{% endif %}{{ job.company }}
+                </a>
+                <span class="row-date">{{ job.dates }}</span>
+            </li>
+            {% for prev in job.earlier | default(value=[]) %}
+                <li class="row earlier">
+                    <span class="row-title">{{ prev.role }}</span>
+                    <span class="row-desc"></span>
+                    <span class="row-date">{{ prev.dates }}</span>
+                </li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    <h2 class="label">projects</h2>
+    {% set projects = get_section(path="projects/_index.md") %}
+    {{<site.entries pages={projects.pages} />}}
+
+    <h2 class="label">misc</h2>
+    <ul class="rows">
+        {% for item in section.extra?.misc | default(value=[]) %}
+            <li class="row">
+                <span class="row-title">{{ item.label }}</span>
+                <a class="row-desc" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.text }} ↗</a>
+            </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock main_content %}
