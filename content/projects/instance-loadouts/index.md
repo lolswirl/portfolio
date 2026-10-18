@@ -31,7 +31,27 @@ it was created by [bisse](https://www.curseforge.com/members/bisse/projects) in 
 
 ### finding where you are
 
-on every loading screen, the addon reads the instance type and id from the game and sorts it into a category: dungeon, raid, delve, arena, battleground, or open world.
+on every loading screen, the addon reads the instance type and id from the game and sorts it into a category: dungeon, raid, delve, arena, battleground, or open world:
+
+```lua
+local _, instanceType, _, difficultyName, _, _, _, instanceID = GetInstanceInfo()
+if instanceType == "none" or tContains(isGarrison, instanceID) then
+    instance = "Open World"
+    -- ...
+elseif instanceType == "party" then
+    instance = "Dungeon"
+    if self.ConvertIDToName[instanceID] and dbLoadouts[instance][instanceID] then
+        encounter = instanceID
+    end
+elseif instanceType == "raid" then
+    instance = instanceID .. " Encounter"
+    -- ...
+elseif difficultyName == "Delves" then
+    instance = "Delve"
+    -- ...
+```
+
+delves report themselves as scenarios, not by an instance type of their own, so they're matched on the difficulty name instead.
 
 each category has a default loadout, and individual instances can override it. a raid can override the new "all raids" default, a dungeon can override the dungeon default, and talents can be overridden without changing the spec.
 
@@ -39,13 +59,44 @@ each category has a default loadout, and individual instances can override it. a
 
 the reminder only shows the parts that are wrong. if your gear set matches but your talents don't, you see one row for talents. if everything already matches, nothing appears.
 
-applying a change waits for the game to confirm it. the button disables while the change goes through, the row updates when the game reports success, and if the game reports a failure, like trying to swap spec mid-cast, the button comes back so you can try again.
+applying a change waits for the game to confirm it. the button disables while the change goes through, the row updates when the game reports success, and if the game reports a failure, like trying to swap spec mid-cast, the button comes back so you can try again:
+
+```lua
+section:SetAction("Change Specialization to " .. name, function()
+    section.button:SetEnabled(false)
+    C_SpecializationInfo.SetSpecialization(specializationSet)
+    addon:RegisterEvent("ACTIVE_PLAYER_SPECIALIZATION_CHANGED", function()
+        if specializationSet == GetSpecialization() then
+            addon:UnregisterEvent("ACTIVE_PLAYER_SPECIALIZATION_CHANGED")
+            addon:UnregisterEvent("SPECIALIZATION_CHANGE_CAST_FAILED")
+            C_Timer.After(0, function()
+                addon:checkIfIsTrackedInstance()
+            end)
+        end
+    end)
+    addon:RegisterEvent("SPECIALIZATION_CHANGE_CAST_FAILED", function()
+        section.button:SetEnabled(true)
+        addon:UnregisterEvent("ACTIVE_PLAYER_SPECIALIZATION_CHANGED")
+        addon:UnregisterEvent("SPECIALIZATION_CHANGE_CAST_FAILED")
+    end)
+end)
+```
+
+after a spec change, the whole check runs again, since a new spec can change which talents and gear are expected.
 
 ### other addons
 
 blizzard has no built-in addon sets, so that part relies on addon managers. it supports addon control panel, better addon list, and simple addon manager. for talents it works with blizzard's own loadouts or talent loadout manager.
 
-loadouts can be shared as text. the data is serialized, compressed, and encoded into a string you can paste anywhere.
+loadouts can be shared as text. the data is serialized, compressed, and encoded into a string you can paste anywhere:
+
+```lua
+local serialized = LibSerialize:Serialize(data)
+local compressed = LibDeflate:CompressDeflate(serialized)
+local encoded = LibDeflate:EncodeForPrint(compressed)
+```
+
+the same steps also decide when to show the changelog. the addon hashes its encoded changelog on login, and only shows it when the hash differs from the one it saved last time.
 
 ## what i've worked on
 

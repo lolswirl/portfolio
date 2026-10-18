@@ -29,6 +29,39 @@ i maintain its mistweaver monk module, and i've also worked on holy paladin and 
 
 the module works in two stages. first, normalizers go through the log and add links between related events: this heal came from that talent proc, or this damage event caused those healing events. then analyzers listen for the events they care about, like heals from one spell or a buff being applied, and use those links to attribute healing to the right source. their results feed the statistics and the guide that grades each cooldown.
 
+an analyzer is only active if the player took its talent, and it subscribes to the events it needs. this is part of the spiritfont module's setup:
+
+```ts
+constructor(options: Options) {
+  super(options);
+  this.active = this.selectedCombatant.hasTalent(talents.SPIRITFONT_1_MISTWEAVER_TALENT);
+
+  this.addEventListener(
+    Events.heal.by(SELECTED_PLAYER).spell(talents.ENVELOPING_MIST_TALENT),
+    this.handleEnv,
+  );
+  this.addEventListener(
+    Events.applybuff.by(SELECTED_PLAYER).spell(SPELLS.SPIRITFONT_BUFF),
+    this.handleSfApply,
+  );
+  // ...
+}
+```
+
+the links do the attribution. a spiritfont buff can come from a proc or from thunder focus tea, and by the time the analyzer sees it, a normalizer has already linked it to its source:
+
+```ts
+handleSfApply(event: ApplyBuffEvent | ApplyBuffStackEvent) {
+  if (HasRelatedEvent(event, SPIRITFONT_PROC)) {
+    this.proccedSpiritfonts += 1;
+  } else if (HasRelatedEvent(event, SPIRITFONT_TFT)) {
+    this.tftSpiritfonts += 1;
+  } else {
+    this.tftSpiritfonts += 1; // fallback for tfts casted before combat
+  }
+}
+```
+
 writing one means describing a spec's rules precisely enough that the analyzer is right on every log, not just the ones you tested. combat logs make that tricky: buffs get extended mid-duration, related events arrive out of order, and a single cast can show up as several separate events.
 
 some of what i've shipped:
@@ -39,10 +72,40 @@ some of what i've shipped:
 - **upkeep:** hero talent statistics, the tier set modules, and patch updates for 12.0.5 and 12.1
 - **bug fixes:** an ancient teachings normalizer that linked the same heals twice when it reran, doubling the attributed healing, and lifecycles buffs that expired unused not being counted as wasted
 
+heart of the jade serpent's analysis comes down to two numbers per spell. while the buff is up, each spell on cooldown gains extra cooldown reduction, and any spell that was already ready wastes what it could have gained. the extra reduction, divided by the spell's normal cooldown, is the number of extra casts:
+
+```ts
+private extraCasts(spellId: number, cdrMap = this.totalExtraCdrMs): number {
+  const cdr = cdrMap.get(spellId) ?? 0;
+  const baseCd = this.abilities.getExpectedCooldownDuration(spellId);
+  // ...
+  return cdr / baseCd;
+}
+```
+
+the ancient teachings fix was a guard at the top of the normalizer. the analysis can run more than once on the same events, for example when you change a filter, and without the guard every rerun linked the heals again:
+
+```ts
+// guard against reruns to avoid doubly linked events thhat have already been processed
+if (damageEvent._linkedEvents?.some((link) => link.relation === ability.linkRelation)) {
+  return;
+}
+```
+
 ## beyond mistweaver
 
 - **holy paladin:** a modernization of the spec's analysis for the war within, initial support for midnight, and modules for new talents like beacon of the savior
 - **core:** fixed the shared ability tracker, which added up critical healing but never counted critical hits. added support for new trinkets. extended shared ui components during the cooldowns revamp, and fixed a bug that drew buff bars across a whole window when the buff wasn't active
+
+the ability tracker fix was one of my first prs, and it was two lines. critical heals and hits added to the total amount, but the count never went up, so every spec's crit count read zero:
+
+```diff
+     cast.healingVal = cast.healingVal.addEvent(event);
+     if (event.type === EventType.Heal && event.hitType === HIT_TYPES.CRIT) {
++      cast.healingCriticalHits += 1;
+       cast.healingCriticalVal = cast.healingCriticalVal.addEvent(event);
+     }
+```
 
 ## challenges
 

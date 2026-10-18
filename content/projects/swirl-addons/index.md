@@ -32,6 +32,45 @@ these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) 
 
 dispel on cursor and no movement left both have the same readme: no config, plug and play.
 
+that works because each one figures out what to track on its own. dispel on cursor has a list of every class's dispels and picks the first one in your spellbook, and checks again whenever your talents change:
+
+```lua
+local function DetectDispelSpell()
+    for _, spellID in ipairs(DISPEL_SPELL_IDS) do
+        if C_SpellBook.IsSpellInSpellBook(spellID) then
+            TRACKED_SPELL_ID = spellID
+            UpdateCooldown()
+            return
+        end
+    end
+
+    TRACKED_SPELL_ID = nil
+    UpdateCooldown()
+end
+```
+
+keystone info builds its short names from the dungeon's full name. it drops "the", uses the first three letters for one-word names, and initials for longer ones, with a couple of special cases where that comes out badly:
+
+```lua
+local specialCases = {
+    ["Seat of the Triumvirate"] = "SEAT",
+    ["Skyreach"] = "SKY",
+}
+
+-- ...
+
+if #words == 1 then
+    return string.sub(words[1], 1, 3):upper()
+end
+
+local abbreviated = ""
+for _, word in ipairs(words) do
+    abbreviated = abbreviated .. string.sub(word, 1, 1)
+end
+
+return abbreviated:upper()
+```
+
 ## personal
 
 these i wrote for myself and haven't published.

@@ -69,6 +69,15 @@ a short script runs after the page loads and picks up two patterns in the markdo
 - **lead-ins:** bold text at the start of a paragraph or list item gets the accent color, like the labels in this list
 - **facts:** a paragraph where every line starts with a bold `key:` becomes a key/value grid, styled like the date and tags at the top of each page
 
+the lead-in check is a few lines. it finds the first child that isn't empty text, and marks it if it's bold:
+
+```js
+document.querySelectorAll(".body p, .body li").forEach(function (el) {
+    var first = Array.from(el.childNodes).find(function (n) { return n.nodeType !== 3 || n.textContent.trim(); });
+    if (first && first.nodeName === "STRONG") first.classList.add("lead");
+});
+```
+
 that keeps the markdown readable on its own, without custom shortcodes for things that come up on most pages.
 
 ### code blocks
