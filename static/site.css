@@ -475,6 +475,11 @@ a.row-desc {
   color: var(--primary-color);
 }
 
+/* stack labels share one width so the item lists line up */
+.stack-label {
+  width: 6ch;
+}
+
 .empty {
   color: var(--text-1);
 }
@@ -524,6 +529,12 @@ a.row-desc {
 
   .exp .row.earlier .row-desc {
     display: none;
+  }
+
+  /* stack rows are short enough to stay on one line */
+  .stack span.row-desc {
+    flex-basis: auto;
+    order: 0;
   }
 }
 

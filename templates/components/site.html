@@ -12,6 +12,28 @@
 </li>
 {% endcomponent site.entry %}
 
+{# experience and education rows: title, logo + place, dates, optional earlier roles #}
+{% component site.timeline(items: array) %}
+<ul class="rows exp">
+    {% for item in items %}
+        <li class="row">
+            <span class="row-title">{{ item.role }}</span>
+            <a class="row-desc company" href="{{ item.url }}" target="_blank" rel="noopener">
+                {% if item.logo %}<img class="logo{% if item.mono_logo %} mono{% endif %}" src="{{ get_url(path=item.logo) }}" alt="" />{% endif %}{{ item.company }}
+            </a>
+            <span class="row-date">{{ item.dates }}</span>
+        </li>
+        {% for prev in item.earlier | default(value=[]) %}
+            <li class="row earlier">
+                <span class="row-title">{{ prev.role }}</span>
+                <span class="row-desc"></span>
+                <span class="row-date">{{ prev.dates }}</span>
+            </li>
+        {% endfor %}
+    {% endfor %}
+</ul>
+{% endcomponent site.timeline %}
+
 {% component site.entries(pages: array) %}
 {% if pages %}
     <ul class="rows">

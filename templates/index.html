@@ -9,28 +9,28 @@
     {% if section.extra?.now %}<p class="now"><span class="now-label">now</span> {{ section.extra.now }}</p>{% endif %}
 
     <h2 class="label">exp</h2>
-    <ul class="rows exp">
-        {% for job in section.extra?.exp | default(value=[]) %}
-            <li class="row">
-                <span class="row-title">{{ job.role }}</span>
-                <a class="row-desc company" href="{{ job.url }}" target="_blank" rel="noopener">
-                    {% if job.logo %}<img class="logo{% if job.mono_logo %} mono{% endif %}" src="{{ get_url(path=job.logo) }}" alt="" />{% endif %}{{ job.company }}
-                </a>
-                <span class="row-date">{{ job.dates }}</span>
-            </li>
-            {% for prev in job.earlier | default(value=[]) %}
-                <li class="row earlier">
-                    <span class="row-title">{{ prev.role }}</span>
-                    <span class="row-desc"></span>
-                    <span class="row-date">{{ prev.dates }}</span>
-                </li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
+    {{<site.timeline items={section.extra?.exp | default(value=[])} />}}
+
+    {% if section.extra?.edu %}
+        <h2 class="label">edu</h2>
+        {{<site.timeline items={section.extra.edu} />}}
+    {% endif %}
 
     <h2 class="label">projects</h2>
     {% set projects = get_section(path="projects/_index.md") %}
     {{<site.entries pages={projects.pages} />}}
+
+    {% if section.extra?.stack %}
+        <h2 class="label">stack</h2>
+        <ul class="rows stack">
+            {% for row in section.extra.stack %}
+                <li class="row">
+                    <span class="row-title stack-label">{{ row.label }}</span>
+                    <span class="row-desc">{{ row.items }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
     <h2 class="label">misc</h2>
     <ul class="rows">
