@@ -204,7 +204,11 @@ nothing gets merged without me reviewing it first.
 
 ### history
 
-the project started in february 2025, and the early code looks very different from what's there now. i started without knowing how to structure a frontend app, and each rewrite since has applied something i learned after the last one.
+before the site, there were python scripts. in january 2025 i wrote a cast timeline in python: each ability had a cast time, cooldown, and haste scaling, a player object applied mistweaver's rules as it went (like chi-ji stacks making enveloping mist cast faster), and matplotlib drew each ramp as a row so two could be compared. the spell timeline is the same idea, rebuilt for the browser.
+
+one of those scripts is, surprisingly, still in use. wow lets you replace its icons with your own `.tga` files, and i use the upscaled set from acidweb's [clean icons: mechagnome edition](https://github.com/AcidWeb/Clean-Icons-Mechagnome-Edition), which look sharper than the originals. the script scans the site's spell data for the icons it needs, converts those files to png, and saves them to the site's icon folder, so the site shows the same icons i see in game.
+
+the site itself started in february 2025, and the early code looks very different from what's there now. i started without knowing how to structure a frontend app, and each rewrite since has applied something i learned after the last one.
 
 ## stack
 
