@@ -29,4 +29,5 @@ socials = [
   { name = "linkedin", url = "https://www.linkedin.com/in/ronald-shevchenko/", icon = "linkedin" },
   { name = "discord", url = "https://discord.com/users/188815794929401856", icon = "discord" },
   { name = "twitch", url = "https://www.twitch.tv/lolswirl", icon = "twitch" },
+  { name = "email", url = "mailto:ronaldshevchenko1@gmail.com", icon = "email" },
 ]
