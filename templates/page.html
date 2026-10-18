@@ -6,16 +6,18 @@
         <a class="back" href="{{ config.base_url }}">← home</a>
         <h1 class="page-header">{{ page.title }}</h1>
 
-        <div class="meta">
-            {% if page.date %}<time>{{ page.date | date(format="%Y-%m-%d") }}</time>{% endif %}
-            {% if page.extra?.read_time %}<span>:: {{ page.reading_time }} min read</span>{% endif %}
-            {% if page.taxonomies?.tags %}
-                <span>::</span>
-                {% for tag in page.taxonomies.tags | sort %}
-                    <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}">#{{ tag }}</a>
-                {% endfor %}
-            {% endif %}
-        </div>
+        {% if page.date or page.extra?.read_time or page.taxonomies?.tags %}
+            <div class="meta">
+                {% if page.date %}<time>{{ page.date | date(format="%Y-%m-%d") }}</time>{% endif %}
+                {% if page.extra?.read_time %}<span>:: {{ page.reading_time }} min read</span>{% endif %}
+                {% if page.taxonomies?.tags %}
+                    <span>::</span>
+                    {% for tag in page.taxonomies.tags | sort %}
+                        <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}">#{{ tag }}</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
 
         {% if page.extra?.card_links or page.extra?.github %}
             <div class="meta links">
