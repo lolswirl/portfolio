@@ -7,8 +7,11 @@ minify_html = true
 
 [markdown.highlighting]
 style = "class"
-light_theme = "github-light"
-dark_theme = "github-dark"
+# banner (rainglow) from vs code with my editor token customizations; the light
+# theme is the same colors darkened to stay readable on the light background
+extra_themes = ["syntax/banner-swirl.json", "syntax/banner-swirl-light.json"]
+light_theme = "banner-swirl-light"
+dark_theme = "banner-swirl"
 
 [extra]
 favicon = "/icons/favicon.svg"
