@@ -314,6 +314,23 @@ time,
   color: inherit;
 }
 
+/* "**key:** value" paragraphs in articles, turned into a grid by site.js:
+   key column fits the longest key, values keep their normal spacing,
+   and italic figures read as bright upright numbers */
+.meta.facts {
+  grid-template-columns: max-content 1fr;
+  margin: 1rem 0;
+}
+
+.meta.facts .v {
+  display: block;
+}
+
+.meta.facts em {
+  font-style: normal;
+  color: var(--text-0);
+}
+
 /* room between the metadata and the article */
 .meta + .body {
   margin-top: 1.5rem;

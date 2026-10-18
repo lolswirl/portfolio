@@ -11,6 +11,39 @@ document.querySelectorAll(".note-toggle").forEach(function (button) {
     });
 });
 
+// paragraphs written as "**key:** value" lines become the same key/value grid as
+// the page metadata. every line has to start with a bold "key:", so ordinary
+// paragraphs that merely open with bold text are left alone.
+document.querySelectorAll(".body p").forEach(function (p) {
+    var lines = [[]];
+    p.childNodes.forEach(function (node) {
+        if (node.nodeName === "BR") lines.push([]);
+        else lines[lines.length - 1].push(node);
+    });
+    var rows = lines.map(function (nodes) {
+        var content = nodes.filter(function (n) { return n.nodeType !== 3 || n.textContent.trim(); });
+        var key = content[0];
+        if (!key || key.nodeName !== "STRONG" || !/:$/.test(key.textContent.trim())) return null;
+        return { key: key, rest: nodes.slice(nodes.indexOf(key) + 1) };
+    });
+    if (rows.some(function (r) { return !r; })) return;
+
+    var grid = document.createElement("div");
+    grid.className = "meta facts";
+    rows.forEach(function (r) {
+        var k = document.createElement("span");
+        k.className = "k";
+        k.textContent = r.key.textContent.trim().replace(/:$/, "");
+        var v = document.createElement("span");
+        v.className = "v";
+        r.rest.forEach(function (n) { v.appendChild(n); });
+        v.normalize();
+        if (v.firstChild && v.firstChild.nodeType === 3) v.firstChild.textContent = v.firstChild.textContent.replace(/^\s+/, "");
+        grid.append(k, v);
+    });
+    p.replaceWith(grid);
+});
+
 // highlight the toc entry for the section currently on screen
 var tocLinks = Array.from(document.querySelectorAll(".toc a"));
 if (tocLinks.length) {
