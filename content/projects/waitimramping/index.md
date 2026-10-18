@@ -36,10 +36,10 @@ so it became a website, which turned out to be the second reason to build it. my
 ## what's on it
 
 <div class="tool-grid">
-{{ tool(url="https://waitimramping.com/timeline", image="https://www.waitimramping.com/previews/timeline.png", title="spell timeline", description="create customized timelines for spell casts and cooldowns") }}
-{{ tool(url="https://waitimramping.com/analysis/spell-reference", image="https://www.waitimramping.com/previews/spell-reference.png", title="spell reference", description="view spellpower data for all relevant spells and talents") }}
-{{ tool(url="https://waitimramping.com/analysis", image="https://www.waitimramping.com/previews/heart-of-the-jade-serpent.png", title="graph & analysis tools", description="compare healing mechanics with data-driven insights") }}
-{{ tool(url="https://waitimramping.com/bugs", image="https://www.waitimramping.com/previews/bugs.png", title="bugs & issues", description="track known issues and bugs affecting specializations") }}
+{% <tool url="https://waitimramping.com/timeline" image="https://www.waitimramping.com/previews/timeline.png" title="spell timeline" description="create customized timelines for spell casts and cooldowns"> %}{% </tool> %}
+{% <tool url="https://waitimramping.com/analysis/spell-reference" image="https://www.waitimramping.com/previews/spell-reference.png" title="spell reference" description="view spellpower data for all relevant spells and talents"> %}{% </tool> %}
+{% <tool url="https://waitimramping.com/analysis" image="https://www.waitimramping.com/previews/heart-of-the-jade-serpent.png" title="graph & analysis tools" description="compare healing mechanics with data-driven insights"> %}{% </tool> %}
+{% <tool url="https://waitimramping.com/bugs" image="https://www.waitimramping.com/previews/bugs.png" title="bugs & issues" description="track known issues and bugs affecting specializations"> %}{% </tool> %}
 </div>
 
 ### and more
@@ -105,11 +105,11 @@ export const calcSpellValue = (spell: spell, player: Player, type: 'damage' | 'h
 };
 ```
 
-{{ note(clickable=true, hidden=true, header="simplifying stats", body="flattening critical strike is a deliberate design choice. crit is a discrete event on any single cast, but across a raid's worth of casts it converges on your crit percentage, so treating it as a flat multiplier is correct in aggregate and wrong for exactly one cast.
+{% <note clickable={true} hidden={true} header="simplifying stats"> %}flattening critical strike is a deliberate design choice. crit is a discrete event on any single cast, but across a raid's worth of casts it converges on your crit percentage, so treating it as a flat multiplier is correct in aggregate and wrong for exactly one cast.
 
 the site isn't a simulation. raidbots answers that question properly, by collating thousands of simulated runs. this is meant to formulate answers that are as close as possible in total rather than per cast, which makes the average the honest number to use.
 
-in a lot of the analysis, excluding stats beyond intellect (and the ones that scale directly through talents) is what makes a spell's individual contribution visible at all.")}}
+in a lot of the analysis, excluding stats beyond intellect (and the ones that scale directly through talents) is what makes a spell's individual contribution visible at all.{% </note> %}
 
 `getSpellAura` is where the spec's identity gets applied. it flattens every core passive into the effects that touch this spell and folds them into a single multiplier:
 

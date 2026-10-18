@@ -15,8 +15,10 @@ include_path = true
 include_content = true
 index_format = "elasticlunr_json"
 
-[markdown]
-highlight_code = true
+[markdown.highlighting]
+style = "class"
+light_theme = "github-light"
+dark_theme = "github-dark"
 
 [extra]
 theme = "toggle-auto"
@@ -45,3 +47,6 @@ menu = [
   { name = "/about", url = "/about", weight = 3 },
   { name = "/tags", url = "/tags", weight = 4 },
 ]
+
+[extra.analytics]
+enabled = false

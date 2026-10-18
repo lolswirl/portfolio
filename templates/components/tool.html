@@ -1,0 +1,3 @@
+{% component tool(url: string, image: string, title: string, description: string) %}
+<a class="tool-card" href="{{ url }}"><span class="tool-card-media" style="background-image: url('{{ image }}')"></span><span class="tool-card-body"><span class="tool-card-title">{{ title }}</span><span class="tool-card-desc">{{ description }}</span></span></a>
+{% endcomponent tool %}
