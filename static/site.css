@@ -234,6 +234,11 @@ a:has(img) {
   border-bottom: none;
 }
 
+/* bold lead-ins at the start of a paragraph or list item (marked by site.js) */
+.body strong.lead {
+  color: var(--primary-color);
+}
+
 .accent {
   color: var(--primary-color);
   font-weight: 600;

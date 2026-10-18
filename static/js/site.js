@@ -11,6 +11,13 @@ document.querySelectorAll(".note-toggle").forEach(function (button) {
     });
 });
 
+// bold text that opens a paragraph or list item is a lead-in ("**holy paladin:** ...");
+// mark it so it can take the accent color. bold mid-sentence is left alone.
+document.querySelectorAll(".body p, .body li").forEach(function (el) {
+    var first = Array.from(el.childNodes).find(function (n) { return n.nodeType !== 3 || n.textContent.trim(); });
+    if (first && first.nodeName === "STRONG") first.classList.add("lead");
+});
+
 // paragraphs written as "**key:** value" lines become the same key/value grid as
 // the page metadata. every line has to start with a bold "key:", so ordinary
 // paragraphs that merely open with bold text are left alone.
