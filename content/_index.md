@@ -3,7 +3,9 @@ title = "hi, i'm ronald"
 
 [extra]
 exp = [
-  { role = "executive software engineer", company = "macquarie", url = "https://www.macquarie.com", logo = "logos/macquarie.png", dates = "nov 2021 — now" },
+  { role = "executive software engineer, l4", company = "macquarie", url = "https://www.macquarie.com", logo = "logos/macquarie.png", dates = "nov 2021 — now", earlier = [
+    { role = "executive software engineer, l3", dates = "nov 2021 — jun 2023" },
+  ] },
   { role = "senior software developer", company = "smt", url = "https://www.smt.com", logo = "logos/smt.png", dates = "apr 2019 — nov 2021", earlier = [
     { role = "software developer", dates = "apr 2019 — jan 2021" },
   ] },
