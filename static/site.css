@@ -415,6 +415,7 @@ a.row-title::before {
   width: 2ch;
   margin-right: 1ch;
   text-align: right;
+  font-weight: 400;
 }
 
 .row-desc {
