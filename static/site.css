@@ -719,11 +719,42 @@ pre.giallo code {
 
 /* tool cards (waitimramping writeup) */
 
+/* mirrors waitimramping's home page: two larger lead cards on top, then
+   smaller cards three across; one column on phones */
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
   margin: 1.5rem 0;
+}
+
+/* markdown wraps each card in its own <p>, so the paragraphs are the grid items */
+.tool-grid > p {
+  margin: 0;
+  grid-column: span 2;
+}
+
+.tool-grid > p:nth-child(-n + 2) {
+  grid-column: span 3;
+}
+
+.tool-grid > p > .tool-card {
+  height: 100%;
+}
+
+.tool-grid > p:nth-child(-n + 2) .tool-card-media {
+  height: 130px;
+}
+
+@media (max-width: 600px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-grid > p,
+  .tool-grid > p:nth-child(-n + 2) {
+    grid-column: auto;
+  }
 }
 
 .tool-card {
@@ -744,7 +775,7 @@ pre.giallo code {
   display: block;
   height: 90px;
   background-size: cover;
-  background-position: center top;
+  background-position: center;
 }
 
 .tool-card-body {
