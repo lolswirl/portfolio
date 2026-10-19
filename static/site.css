@@ -695,7 +695,7 @@ a.row-desc {
     order: 3;
   }
 
-  /* on phones each job stacks its role above company and dates, with dividers between jobs */
+  /* on phones each role shares a line with its dates, and the company goes below */
   .exp .row:not(.earlier) {
     padding: 0.75rem 0 0.4rem;
   }
@@ -705,17 +705,23 @@ a.row-desc {
   }
 
   .exp .row:not(.earlier) .row-title {
-    flex-basis: 100%;
     margin-bottom: 0.2rem;
   }
 
-  .exp a.row-desc {
+  .exp .row-date {
     order: 2;
+    margin-left: auto;
   }
 
-  .exp .row-date {
+  /* a zero-height full-width item breaks the line, so the company link stays only as wide as its text */
+  .exp .row:not(.earlier)::after {
+    content: "";
     order: 3;
-    margin-left: auto;
+    flex-basis: 100%;
+  }
+
+  .exp a.row-desc {
+    order: 4;
   }
 
   .exp .row.earlier {
