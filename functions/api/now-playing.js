@@ -1,6 +1,8 @@
 // spotify now playing and most played, using SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_REFRESH_TOKEN
 
 const CACHE_SECONDS = 15;
+const TOP_SECONDS = 6 * 60 * 60;
+const LAST_GOOD_SECONDS = 7 * 24 * 60 * 60;
 
 async function getAccessToken(env) {
     const res = await fetch("https://accounts.spotify.com/api/token", {
@@ -40,27 +42,82 @@ async function getNow(headers) {
     return last ? { ...toTrack(last.track), isPlaying: false } : null;
 }
 
-// short is 4 weeks, medium 6 months, and long 1 year
+// short is 4 weeks, medium 6 months, and long 1 year. 20 per list gives genres and averages more to
+// work with, while the page only shows the top 5
 async function getTop(headers, type, range) {
-    const top = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${range}_term&limit=5`, { headers });
-    if (!top.ok) return [];
-    const items = (await top.json()).items ?? [];
-    return type === "artists" ? items.map((a) => ({ name: a.name, url: a.external_urls.spotify })) : items.map(toTrack);
+    const top = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${range}_term&limit=20`, { headers });
+    if (!top.ok) throw new Error(`top ${type} failed: ${top.status}`);
+    return (await top.json()).items ?? [];
+}
+
+// genres that come up most across the top artists
+function topGenres(artists) {
+    const counts = {};
+    artists.forEach((a) => (a.genres ?? []).forEach((g) => (counts[g] = (counts[g] ?? 0) + 1)));
+    return Object.keys(counts).sort((a, b) => counts[b] - counts[a]).slice(0, 4);
+}
+
+// average track popularity (0-100) and the span of release years. either is null if spotify leaves the field out
+function trackStats(tracks) {
+    const popularity = tracks.map((t) => t.popularity).filter((p) => typeof p === "number");
+    const years = tracks.map((t) => parseInt(t.album?.release_date, 10)).filter((y) => y > 0);
+    return {
+        popularity: popularity.length ? Math.round(popularity.reduce((a, b) => a + b, 0) / popularity.length) : null,
+        years: years.length ? [Math.min(...years), Math.max(...years)] : null,
+    };
 }
 
 const RANGES = ["short", "medium", "long"];
 
-async function lookup(env) {
-    const token = await getAccessToken(env);
-    const headers = { Authorization: `Bearer ${token}` };
-    const [now, artists, tracks] = await Promise.all([
-        getNow(headers),
+async function getTopLists(headers) {
+    const [artists, tracks] = await Promise.all([
         Promise.all(RANGES.map((range) => getTop(headers, "artists", range))),
         Promise.all(RANGES.map((range) => getTop(headers, "tracks", range))),
     ]);
-    const byRange = (lists) => Object.fromEntries(RANGES.map((range, i) => [range, lists[i]]));
-    // "on repeat" is the most played track of the short range
-    return { now, onRepeat: tracks[0][0] ?? null, topArtists: byRange(artists), topTracks: byRange(tracks) };
+    const byRange = (fn) => Object.fromEntries(RANGES.map((range, i) => [range, fn(i)]));
+    return {
+        // "on repeat" is the most played track of the short range
+        onRepeat: tracks[0][0] ? toTrack(tracks[0][0]) : null,
+        topArtists: byRange((i) => artists[i].slice(0, 5).map((a) => ({ name: a.name, url: a.external_urls.spotify, image: a.images?.at(-1)?.url ?? null }))),
+        topTracks: byRange((i) => tracks[i].slice(0, 5).map(toTrack)),
+        topGenres: byRange((i) => topGenres(artists[i])),
+        topStats: byRange((i) => trackStats(tracks[i])),
+        savedSongs: await getSavedCount(headers),
+    };
+}
+
+// total liked songs (needs the user-library-read scope). it's optional, so a failure is just null
+async function getSavedCount(headers) {
+    const saved = await fetch("https://api.spotify.com/v1/me/tracks?limit=1", { headers });
+    return saved.ok ? (await saved.json()).total ?? null : null;
+}
+
+// top lists change slowly and spotify rate-limits them hard, so they're cached for hours on their own.
+// when spotify refuses, the last good lists are served again instead of nothing
+async function cachedTopLists(request, getHeaders, waitUntil) {
+    const cache = caches.default;
+    const fresh = new Request(new URL("/api/now-playing/top", request.url));
+    const lastGood = new Request(new URL("/api/now-playing/top-last", request.url));
+    const hit = await cache.match(fresh);
+    if (hit) return hit.json();
+
+    try {
+        const lists = await getTopLists(await getHeaders());
+        waitUntil(cache.put(fresh, Response.json(lists, { headers: { "Cache-Control": `public, max-age=${TOP_SECONDS}` } })));
+        waitUntil(cache.put(lastGood, Response.json(lists, { headers: { "Cache-Control": `public, max-age=${LAST_GOOD_SECONDS}` } })));
+        return lists;
+    } catch {
+        const stale = await cache.match(lastGood);
+        return stale ? stale.json() : {};
+    }
+}
+
+async function lookup(request, env, waitUntil) {
+    // the token is only fetched if something actually needs spotify
+    let headers = null;
+    const getHeaders = async () => headers ??= { Authorization: `Bearer ${await getAccessToken(env)}` };
+    const [now, top] = await Promise.all([getHeaders().then(getNow), cachedTopLists(request, getHeaders, waitUntil)]);
+    return { now, ...top };
 }
 
 // lets `zola serve` on localhost read this from `wrangler pages dev` on another port
@@ -81,7 +138,7 @@ export async function onRequestGet({ request, env, waitUntil }) {
 
     let body;
     try {
-        body = await lookup(env);
+        body = await lookup(request, env, waitUntil);
     } catch {
         return allowLocalhost(request, Response.json(null, { status: 502 }));
     }

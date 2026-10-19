@@ -413,7 +413,8 @@ time,
 }
 
 .range-picker button + button::before {
-  content: " / ";
+  content: "/";
+  margin: 0 1ch;
   color: var(--text-2);
 }
 
@@ -422,13 +423,47 @@ time,
   color: var(--primary-color);
 }
 
-.top-list-items {
+/* about page music stats, laid out like the page metadata grid */
+.music-stats {
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1.5ch;
+  margin: 1rem 0;
+}
+
+.music-stats > div {
+  display: contents;
+}
+
+.music-stats > div[hidden] {
+  display: none;
+}
+
+.music-stats .v {
   display: block;
-  margin-top: 0.25rem;
 }
 
 .top-song {
   display: block;
+}
+
+.genre + .genre {
+  margin-left: 1ch;
+}
+
+/* popularity as a thin bar filled to the score */
+.popularity-bar {
+  display: inline-block;
+  width: 10ch;
+  height: 4px;
+  margin-right: 1ch;
+  vertical-align: middle;
+  background: var(--bg-2);
+}
+
+.popularity-bar span {
+  display: block;
+  height: 100%;
+  background: var(--primary-color);
 }
 
 /* homepage spotify lines */

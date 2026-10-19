@@ -15,7 +15,7 @@
     }
 
     // each keyed by range (short, medium, or long)
-    var top = { artists: null, songs: null };
+    var top = { artists: null, songs: null, genres: null, stats: null };
 
     function link(text, url) {
         var a = document.createElement("a");
@@ -35,26 +35,77 @@
         if (shown) group.hidden = false;
     }
 
-    function renderTop(row, range) {
-        var lists = top[row.dataset.kind];
-        var items = lists && lists[range];
-        if (!items || !items.length) return false;
-        var out = row.querySelector(".top-list-items");
-        out.replaceChildren();
-        items.forEach(function (item, i) {
-            if (row.dataset.kind === "artists") {
-                out.append(i ? ", " : "", link(item.name, item.url));
-            } else {
+    function cover(src) {
+        var img = document.createElement("img");
+        img.className = "logo listening-cover";
+        img.alt = "";
+        img.src = src;
+        return img;
+    }
+
+    // each row renders one kind of data for the picked range, and hides itself when spotify sent none
+    var renderers = {
+        artists: function (out, range) {
+            var items = top.artists && top.artists[range];
+            if (!items || !items.length) return false;
+            items.forEach(function (artist, i) {
+                out.append(i ? ", " : "");
+                if (artist.image) out.append(cover(artist.image));
+                out.append(link(artist.name, artist.url));
+            });
+            return true;
+        },
+        songs: function (out, range) {
+            var items = top.songs && top.songs[range];
+            if (!items || !items.length) return false;
+            items.forEach(function (song) {
                 var line = document.createElement("span");
                 line.className = "top-song";
                 var artist = document.createElement("span");
                 artist.className = "listening-artist";
-                artist.textContent = item.artist;
-                line.append(link(item.title, item.url), " ", artist);
+                artist.textContent = song.artist;
+                line.append(link(song.title, song.url), " ", artist);
                 out.append(line);
-            }
-        });
-        return true;
+            });
+            return true;
+        },
+        // genres as #tags, like the tags at the top of a project page
+        genres: function (out, range) {
+            var genres = top.genres && top.genres[range];
+            if (!genres || !genres.length) return false;
+            genres.forEach(function (genre) {
+                var tag = document.createElement("span");
+                tag.className = "tag genre";
+                tag.textContent = genre.replace(/ /g, "-");
+                out.append(tag);
+            });
+            return true;
+        },
+        popularity: function (out, range) {
+            var stats = top.stats && top.stats[range];
+            if (!stats || stats.popularity === null) return false;
+            var bar = document.createElement("span");
+            bar.className = "popularity-bar";
+            var fill = document.createElement("span");
+            fill.style.width = stats.popularity + "%";
+            bar.append(fill);
+            out.append(bar, stats.popularity + " / 100 on average");
+            return true;
+        },
+        years: function (out, range) {
+            var stats = top.stats && top.stats[range];
+            if (!stats || !stats.years) return false;
+            out.textContent = stats.years[0] === stats.years[1] ? String(stats.years[0]) : stats.years[0] + " to " + stats.years[1];
+            return true;
+        },
+    };
+
+    function renderTop(row, range) {
+        var out = row.querySelector(".top-list-items");
+        out.replaceChildren();
+        var shown = renderers[row.dataset.kind](out, range);
+        row.hidden = !shown;
+        return shown;
     }
 
     document.querySelectorAll(".top-lists .range-picker button").forEach(function (button) {
@@ -98,7 +149,14 @@
                 document.querySelectorAll(".on-repeat").forEach(function (row) { fill(row, data.onRepeat); });
                 top.artists = data.topArtists || null;
                 top.songs = data.topTracks || null;
+                top.genres = data.topGenres || null;
+                top.stats = data.topStats || null;
                 document.querySelectorAll(".top-lists").forEach(renderGroup);
+                document.querySelectorAll(".saved-songs").forEach(function (row) {
+                    if (typeof data.savedSongs !== "number") return;
+                    row.querySelector(".saved-count").textContent = data.savedSongs.toLocaleString();
+                    row.hidden = false;
+                });
             })
             .catch(function () {});
     }
