@@ -19,7 +19,7 @@ across all of it, i'd rather build something strong and useful than something qu
 
 want to know more? feel free to [get in touch](#get-in-touch)! :)
 
-## video games
+## play
 
 ### world of warcraft
 
