@@ -59,7 +59,7 @@ document.querySelectorAll(".body p").forEach(function (p) {
 // every number in article text is bolded in the accent, skipping code, links, headings, and the
 // metadata grids, and leaving numbers that are part of a word ("3d", "s1") alone
 var NUMBER = /(^|[^\w.#])(\d+(?:[.,]\d+)*%?)(?!\w)/g;
-var SKIP = "a, code, pre, strong, b, h1, h2, h3, h4, .meta, button";
+var SKIP = "a, code, pre, strong, b, h1, h2, h3, h4, .meta, button, figcaption";
 var walker = document.createTreeWalker(document.querySelector(".body") || document.createElement("div"), NodeFilter.SHOW_TEXT, {
     acceptNode: function (n) {
         return /\d/.test(n.textContent) && !n.parentElement.closest(SKIP) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;

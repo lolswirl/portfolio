@@ -434,6 +434,10 @@ img {
 }
 
 .screenshot-row .screenshot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
   margin: 0;
 }
 

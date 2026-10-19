@@ -1,3 +1,3 @@
-{% component screenshot(src: string, alt: string) %}
-<figure class="screenshot"><img src="{{ src }}" alt="{{ alt }}" /><figcaption>{{ alt }}</figcaption></figure>
+{% component screenshot(src: string, alt: string, width: string = "") %}
+<figure class="screenshot"{% if width %} style="max-width: {{ width }}"{% endif %}><img src="{{ src }}" alt="{{ alt }}" /><figcaption>{{ alt }}</figcaption></figure>
 {% endcomponent screenshot %}
