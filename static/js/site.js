@@ -162,3 +162,24 @@ if (document.documentElement.classList.contains("typing")) {
         }, 40);
     }, 300);
 }
+
+var shots = document.querySelectorAll(".screenshot img");
+if (shots.length) {
+    var viewer = document.createElement("dialog");
+    viewer.className = "viewer";
+    viewer.innerHTML = "<img alt=\"\"><p></p>";
+    document.body.append(viewer);
+    viewer.addEventListener("click", function () { viewer.close(); });
+
+    shots.forEach(function (img) {
+        var open = function () {
+            viewer.querySelector("img").src = img.src;
+            viewer.querySelector("img").alt = img.alt;
+            viewer.querySelector("p").textContent = img.alt;
+            viewer.showModal();
+        };
+        img.tabIndex = 0;
+        img.addEventListener("click", open);
+        img.addEventListener("keydown", function (e) { if (e.key === "Enter") open(); });
+    });
+}
