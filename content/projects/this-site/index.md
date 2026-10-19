@@ -13,7 +13,7 @@ read_time = true
 # drop a screenshot in this folder and uncomment (path is section-relative):
 # local_image = "this-site/screenshot.png"
 tags = ["zola", "css"]
-github = "https://github.com/lolswirl/rshevchenko"
+github = "https://github.com/lolswirl/portfolio"
 +++
 
 ## intro
@@ -102,4 +102,4 @@ it was on vercel originally, and now builds on cloudflare pages. pages runs zola
 
 **built with:** zola, tera templates, css, javascript  
 **hosting:** cloudflare pages  
-**source:** [github](https://github.com/lolswirl/rshevchenko/)
+**source:** [github](https://github.com/lolswirl/portfolio/)
