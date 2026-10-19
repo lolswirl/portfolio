@@ -12,7 +12,8 @@
 :root.light {
   --text-0: #212121;
   --text-1: #666666;
-  --text-2: #8c8c8c;
+  /* text-2 is darkened to reach 4.5:1 (wcag aa) against bg-0 */
+  --text-2: #6c6c6c;
   --bg-0: #efefef;
   --bg-1: #e4e4e4;
   --bg-2: #d6d6d6;
