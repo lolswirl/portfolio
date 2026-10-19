@@ -41,5 +41,15 @@
             </li>
         {% endfor %}
     </ul>
+
+    {% if config.extra.now_playing %}
+        <div class="music">
+            <p class="now listening" hidden><span class="now-label">listening</span> <img class="logo listening-cover" alt="" /><a class="listening-title" target="_blank" rel="noopener"></a> <span class="listening-artist"></span></p>
+            <p class="now on-repeat" hidden><span class="now-label">on repeat</span> <img class="logo listening-cover" alt="" /><a class="listening-title" target="_blank" rel="noopener"></a> <span class="listening-artist"></span></p>
+        </div>
+    {% endif %}
+
+    <footer class="oscilloscope-footer" aria-hidden="true"><canvas class="oscilloscope"></canvas></footer>
+    <script defer src="{{ get_url(path='js/oscilloscope.js') }}"></script>
 </main>
 {% endblock main_content %}

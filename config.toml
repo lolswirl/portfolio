@@ -22,6 +22,8 @@ delimiter = "b"
 earlier_role = "f"
 # project row marker: a (→), b (▸), c (»), d (›), e (⇢, from a fallback font so slightly wider), f (↳), g (⇒), h (➜), i (0, 1, 2...), no entry ie "" defaults (>)
 row_marker = "i"
+# homepage "listening" line from spotify, served by functions/api/now-playing.js on cloudflare pages
+now_playing = true
 
 socials = [
   { name = "github", url = "https://github.com/lolswirl/", icon = "github" },

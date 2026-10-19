@@ -30,7 +30,7 @@
     <script src="{{ get_url(path='js/theme.js') }}"></script>
     <script defer src="{{ get_url(path='js/site.js') }}"></script>
     <script defer src="{{ get_url(path='js/tooltips.js') }}"></script>
-</head>
+    {% if config.extra.now_playing %}<script defer src="{{ get_url(path='js/listening.js') }}"></script>{% endif %}</head>
 
 <body>
     <div class="left-content"></div>
@@ -48,6 +48,11 @@
                 </div>
             </div>
             <div class="right-nav">
+                <button class="oscilloscope-toggle" type="button" title="oscilloscope: wave, string, or off">
+                    <img src="{{ get_url(path='icons/activity.svg') }}" data-mode="wave" alt="wave" />
+                    <img src="{{ get_url(path='icons/music.svg') }}" data-mode="string" alt="string" />
+                    <img src="{{ get_url(path='icons/activity.svg') }}" data-mode="off" alt="off" />
+                </button>
                 <button class="theme-toggle" type="button" title="toggle theme">
                     <img src="{{ get_url(path='icons/sun.svg') }}" data-mode="light" alt="light" />
                     <img src="{{ get_url(path='icons/moon.svg') }}" data-mode="dark" alt="dark" />

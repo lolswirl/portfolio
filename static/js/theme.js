@@ -1,4 +1,4 @@
-// cycles light -> dark -> auto; "auto" follows the os setting
+// cycles light -> dark -> auto, where "auto" follows the os setting
 var THEME_KEY = "theme-storage";
 
 function savedTheme() {
@@ -39,3 +39,10 @@ function toggleTheme() {
 
 applyTheme();
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
+// apply the saved oscilloscope mode (wave, string, or off) before first paint (oscilloscope.js)
+document.documentElement.dataset.oscilloscopeMode = "wave";
+try {
+    var savedMode = localStorage.getItem("oscilloscope");
+    if (savedMode === "string" || savedMode === "off") document.documentElement.dataset.oscilloscopeMode = savedMode;
+} catch (e) {}

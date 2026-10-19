@@ -110,7 +110,8 @@ nav {
 }
 
 .socials img,
-.theme-toggle img {
+.theme-toggle img,
+.oscilloscope-toggle img {
   display: block;
   width: 16px;
   height: 16px;
@@ -122,11 +123,36 @@ nav {
   background-color: var(--primary-color);
 }
 
-.theme-toggle {
+.right-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.theme-toggle,
+.oscilloscope-toggle {
   background: none;
   border: none;
   padding: 0.1rem;
   cursor: pointer;
+}
+
+/* one icon per oscilloscope mode, dimmed when off, and hidden on pages without one */
+.oscilloscope-toggle img {
+  display: none;
+}
+
+:root[data-oscilloscope-mode="wave"] .oscilloscope-toggle [data-mode="wave"],
+:root[data-oscilloscope-mode="string"] .oscilloscope-toggle [data-mode="string"],
+:root[data-oscilloscope-mode="off"] .oscilloscope-toggle [data-mode="off"] {
+  display: block;
+}
+
+.oscilloscope-toggle [data-mode="off"] {
+  opacity: 0.4;
+}
+
+body:not(:has(.oscilloscope-footer)) .oscilloscope-toggle {
+  display: none;
 }
 
 .theme-toggle img {
@@ -139,7 +165,7 @@ nav {
   display: block;
 }
 
-/* same look as a hovered link: flat accent block, white text */
+/* tooltips look like a hovered link, a flat accent block with white text */
 .social-tooltip {
   background-color: var(--secondary-color);
   color: var(--hover-color);
@@ -282,7 +308,7 @@ time,
   color: var(--text-1);
 }
 
-/* page metadata as a key/value grid: dim labels, values beside them */
+/* page metadata as a grid, with dim labels and values beside them */
 .meta {
   display: grid;
   grid-template-columns: 6ch 1fr;
@@ -299,8 +325,7 @@ time,
   gap: 0 0.5em;
 }
 
-/* metadata links: thin accent underline so they read as clickable without
-   competing with links in the article */
+/* a thin accent underline makes metadata links read as clickable without competing with the article */
 .meta a {
   border-bottom: 1px solid var(--primary-color);
 }
@@ -360,7 +385,7 @@ time,
   visibility: hidden;
 }
 
-/* one-line rows: exp, projects, misc, lists */
+/* one-line rows for exp, projects, misc, and lists */
 
 .intro p {
   margin: 0.5rem 0;
@@ -376,12 +401,91 @@ time,
   color: var(--text-1);
 }
 
+/* about page "most played" range picker */
+.range-picker button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-transform: inherit;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.range-picker button + button::before {
+  content: " / ";
+  color: var(--text-2);
+}
+
+.range-picker button:hover,
+.range-picker button[aria-pressed="true"] {
+  color: var(--primary-color);
+}
+
+.top-list-items {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.top-song {
+  display: block;
+}
+
+/* homepage spotify lines */
+.music {
+  margin-top: 2.5rem;
+}
+
+.music .now:first-child {
+  margin-top: 0;
+}
+
 .now-label {
   color: var(--primary-color);
 }
 
 .now-label::after {
   content: ":";
+}
+
+.listening-artist {
+  color: var(--text-2);
+}
+
+.listening-cover {
+  box-sizing: border-box;
+  border: 1px solid var(--bg-2);
+}
+
+/* homepage oscilloscope (oscilloscope.js) */
+.oscilloscope-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 64px;
+  cursor: crosshair;
+  touch-action: pan-y;
+  background: linear-gradient(to bottom, transparent, var(--bg-0) 70%);
+}
+
+.oscilloscope {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+body:has(.oscilloscope-footer) {
+  padding-bottom: calc(64px + 1rem);
+}
+
+:root[data-oscilloscope-mode="off"] .oscilloscope-footer {
+  display: none;
+}
+
+:root[data-oscilloscope-mode="off"] body:has(.oscilloscope-footer) {
+  padding-bottom: 3rem;
 }
 
 .more {
@@ -482,7 +586,7 @@ a.row-desc,
   border-bottom: none;
 }
 
-/* links size to their own text; the margin pushes the date right instead */
+/* links size to their own text, and the margin pushes the date right instead */
 a.row-desc {
   flex: 0 1 auto;
   margin-right: auto;
@@ -522,8 +626,7 @@ a.row-desc {
     order: 3;
   }
 
-  /* exp on phones: role on its own line, then company left / dates right,
-     with a divider between jobs (a promotion's earlier role stays inside its job) */
+  /* on phones each job stacks its role above company and dates, with dividers between jobs */
   .exp .row:not(.earlier) {
     padding: 0.75rem 0 0.4rem;
   }
@@ -660,7 +763,7 @@ pre.giallo code {
 
 /* note component */
 
-/* lighter gray block with an accent rule marks it as interactive; toggle reads like body text with +/− */
+/* a lighter gray block with an accent rule marks it as interactive, and the toggle reads like body text with +/− */
 .note-container {
   border-left: 2px solid var(--primary-color);
   background-color: var(--bg-1);
@@ -724,8 +827,7 @@ pre.giallo code {
 
 /* tool cards (waitimramping writeup) */
 
-/* mirrors waitimramping's home page: two larger lead cards on top, then
-   smaller cards three across; one column on phones */
+/* mirrors waitimramping's home page, with two large lead cards above smaller ones three across */
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
