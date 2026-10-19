@@ -13,7 +13,7 @@ read_time = true
 # drop a screenshot in this folder and uncomment (path is section-relative):
 # local_image = "servers-up/screenshot.png"
 tags = ["javascript", "node", "discord"]
-github = "https://github.com/lolswirl/servers-up"
+github = "https://github.com/lolswirl/serversup"
 +++
 
 ## intro

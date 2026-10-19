@@ -11,7 +11,7 @@ tags = ["typescript", "wow", "theorycrafting"]
 blurb = "theorycrafting and optimization tools for wow healers"
 read_time = true
 local_image = "waitimramping/screenshot.png"
-github = "https://github.com/lolswirl/wait-im-ramping"
+github = "https://github.com/lolswirl/waitimramping"
 card_links = [
   { url = "https://www.waitimramping.com", text = "live site", icon = "globe" },
 ]
