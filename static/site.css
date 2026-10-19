@@ -99,7 +99,14 @@ code, pre, kbd, samp {
 
 /* nav */
 
+/* sticky header, padded so it keeps the body's top gap when stuck */
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin-top: -0.9rem;
+  padding: 0.9rem 0 0.5rem;
+  background-color: var(--bg-0);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
