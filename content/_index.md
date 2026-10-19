@@ -14,6 +14,7 @@ exp = [
 misc = [
   { label = "publication", text = "unit disk cover for massive point sets", url = "https://link.springer.com/chapter/10.1007/978-3-030-34029-2_10" },
   { label = "wowhead", text = "mistweaver monk guide", url = "https://www.wowhead.com/guide/classes/monk/mistweaver/overview-pve-healer" },
+  { label = "metafy", text = "healer coaching", url = "https://metafy.gg/@swirl" },
 ]
 edu = [
   { role = "b.s. comp sci", company = "uni of north florida", url = "https://www.unf.edu", logo = "logos/unf.png", mono_logo = true, dates = "2017 — 2019" },
