@@ -30,7 +30,7 @@ swirl framework is my set of those pieces, written once and shared by my addons.
 
 [instance loadouts](/projects/instance-loadouts/) used to build its ui on abstractframework, another addon's framework. wago doesn't allow packaging another addon inside yours, so users had to install it separately, and the readme needed a note explaining that.
 
-i wrote this to replace it, and moved instance loadouts over the same day. [swirlui core](/projects/swirl-addons/) uses it too.
+i wrote this to replace it, and moved instance loadouts over the same day. [swirlui core](/projects/swirladdons/) uses it too.
 
 ## what's in it
 
@@ -83,5 +83,5 @@ a monk sees green and a mage sees blue, in every addon built on it.
 ## stack
 
 **built with:** lua, world of warcraft addon api  
-**used by:** [instance loadouts](/projects/instance-loadouts/), [swirlui core](/projects/swirl-addons/)  
+**used by:** [instance loadouts](/projects/instance-loadouts/), [swirlui core](/projects/swirladdons/)  
 **size:** _~2.2k_ lines across _21_ files

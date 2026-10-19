@@ -1,5 +1,5 @@
 +++
-title = "swirl-addons"
+title = "swirl addons"
 description = "small world of warcraft addons, each written to fix one specific thing: dispel and movement cooldowns, keystone info, lust alerts, lifebloom tracking, and a ui pack."
 weight = 2
 date = 2022-12-06
@@ -11,9 +11,9 @@ tags = ["lua", "wow"]
 blurb = "small, single-purpose wow addons"
 read_time = true
 # drop a screenshot in this folder and uncomment (path is section-relative):
-# local_image = "swirl-addons/screenshot.png"
+# local_image = "swirladdons/screenshot.png"
 tags = ["lua", "wow"]
-github = "https://github.com/swirl-addons"
+github = "https://github.com/swirladdons"
 +++
 
 ## intro
@@ -22,7 +22,7 @@ a collection of small world of warcraft addons. most started because something i
 
 ## published
 
-these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) and [wago](https://addons.wago.io/user/Swirl), with source on [github](https://github.com/swirl-addons).
+these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) and [wago](https://addons.wago.io/user/Swirl), with source on [github](https://github.com/swirladdons).
 
 - **[dispel on cursor](https://www.curseforge.com/wow/addons/dispel-on-cursor):** shows your dispel's cooldown next to your mouse cursor. it finds whichever dispel your spec knows, so it works for every class that has one without any setup
 - **[no movement left](https://www.curseforge.com/wow/addons/no-movement-left):** shows a countdown in the middle of the screen when your movement ability is on cooldown, like "NO ROLL (4.2)". each class has its own list of abilities and short names
@@ -84,4 +84,4 @@ these i wrote for myself and haven't published.
 
 **built with:** lua, world of warcraft addon api  
 **published on:** [curseforge](https://www.curseforge.com/members/lolswirl/projects), [wago](https://addons.wago.io/user/Swirl)  
-**source:** [github](https://github.com/swirl-addons)
+**source:** [github](https://github.com/swirladdons)

@@ -25,7 +25,7 @@ want to know more? feel free to [get in touch](#get-in-touch)! :)
 
 i've played wow since cataclysm, almost 600 days of /played across it all, and i've mained mistweaver monk since mists of pandaria. healing competitively has been my focus ever since, and i've reached world rank 20 in raid and earned 0.1% titles in mythic+ across several seasons. i write the [mistweaver guide](https://www.wowhead.com/guide/classes/monk/mistweaver/overview-pve-healer) on wowhead, and i'm a veteran and moderator in peak of serenity, the monk community discord.
 
-most of my side projects come from the game. it started because i had questions about my own spec that no tool answered, and that turned into [wait, i'm ramping!](/projects/waitimramping/), a site of planning and analysis tools for healers. from there i started contributing to the tools other players already use. i maintain the mistweaver module in [wowanalyzer](/projects/wowanalyzer/), and built the mistweaver model in [qe live](/projects/questionably-epic/). i also write [addons](/projects/swirl-addons/), mostly small ones that fix one thing.
+most of my side projects come from the game. it started because i had questions about my own spec that no tool answered, and that turned into [wait, i'm ramping!](/projects/waitimramping/), a site of planning and analysis tools for healers. from there i started contributing to the tools other players already use. i maintain the mistweaver module in [wowanalyzer](/projects/wowanalyzer/), and built the mistweaver model in [qe live](/projects/questionably-epic/). i also write [addons](/projects/swirladdons/), mostly small ones that fix one thing.
 
 i like helping other healers get better and enjoy the role more.
 
