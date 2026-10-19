@@ -26,6 +26,7 @@
     var wave = (function () {
         var AMP = 18; // wave height in px
         var BEAT_SPEED = 500; // px per second a beat ripples outward
+        var PLUCK_ROUND = 20; // px over which a pluck's peak is rounded off
         var plucks = [];
 
         // wave number (rad/px), base speed (rad/s), and weight, with speeds that drift so it never settles into a rhythm
@@ -71,7 +72,8 @@
                 y += (pointer.y - H / 2) * 0.6 * pointer.pull * Math.exp(-dx * dx / (2 * PULL_RADIUS * PULL_RADIUS));
 
                 plucks.forEach(function (p) {
-                    var age = t - p.born, d = Math.abs(x - p.x);
+                    // √(d^2 + w^2) − w rounds off the sharp corner |x − x₀| would leave under the click
+                    var dx = x - p.x, d = Math.sqrt(dx * dx + PLUCK_ROUND * PLUCK_ROUND) - PLUCK_ROUND, age = t - p.born;
                     y += p.strength * Math.exp(-age * 1.8) * Math.exp(-d / 260) * Math.sin(d * 0.06 - age * 14);
                 });
                 return y;
