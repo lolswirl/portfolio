@@ -12,18 +12,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const img = link.querySelector('img');
         const tooltipText = img.getAttribute('alt');
         
-        link.addEventListener('mouseenter', function(e) {
+        function show() {
             tooltip.textContent = tooltipText;
             tooltip.style.display = 'block';
 
             const rect = link.getBoundingClientRect();
             tooltip.style.left = (rect.left + window.scrollX) + 'px';
             tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
-        });
+        }
 
-        link.addEventListener('mouseleave', function() {
+        function hide() {
             tooltip.style.display = 'none';
-        });
+        }
+
+        // keyboard focus shows the same tooltip as hovering
+        link.addEventListener('mouseenter', show);
+        link.addEventListener('focus', show);
+        link.addEventListener('mouseleave', hide);
+        link.addEventListener('blur', hide);
         
         link.addEventListener('mousemove', function(e) {
             const rect = link.getBoundingClientRect();

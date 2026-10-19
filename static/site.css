@@ -45,6 +45,16 @@ html {
   line-height: var(--line-height);
 }
 
+/* an accent outline for keyboard focus only, so mouse clicks don't leave a ring behind */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 body {
   display: flex;
   flex-direction: column;
