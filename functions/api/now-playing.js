@@ -23,6 +23,7 @@ function toTrack(item) {
         artist: item.artists.map((a) => a.name).join(", "),
         url: item.external_urls.spotify,
         image: item.album.images.at(-1)?.url ?? null,
+        imageLarge: item.album.images.at(-2)?.url ?? null,
     };
 }
 
@@ -78,7 +79,7 @@ async function getTopLists(headers) {
     return {
         // "on repeat" is the most played track of the short range
         onRepeat: tracks[0][0] ? toTrack(tracks[0][0]) : null,
-        topArtists: byRange((i) => artists[i].slice(0, 5).map((a) => ({ name: a.name, url: a.external_urls.spotify, image: a.images?.at(-1)?.url ?? null }))),
+        topArtists: byRange((i) => artists[i].slice(0, 5).map((a) => ({ name: a.name, url: a.external_urls.spotify, image: a.images?.at(-1)?.url ?? null, imageLarge: a.images?.at(-2)?.url ?? null }))),
         topTracks: byRange((i) => tracks[i].slice(0, 5).map(toTrack)),
         topGenres: byRange((i) => topGenres(artists[i])),
         topStats: byRange((i) => trackStats(tracks[i])),

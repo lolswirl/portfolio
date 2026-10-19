@@ -6,10 +6,13 @@
         title.textContent = track.title;
         title.href = track.url;
         row.querySelector(".listening-artist").textContent = track.artist;
+        // only rebuilt when the song changes
         var cover = row.querySelector(".listening-cover");
-        if (cover) {
-            cover.hidden = !track.image;
-            if (track.image) cover.src = track.image;
+        if (track.image && cover.dataset.src !== track.image) {
+            var fresh = ditherCover(track.image, track.imageLarge);
+            fresh.classList.add("listening-cover");
+            fresh.dataset.src = track.image;
+            cover.replaceWith(fresh);
         }
         row.hidden = false;
     }
@@ -35,12 +38,17 @@
         if (shown) group.hidden = false;
     }
 
-    function cover(src) {
-        var img = document.createElement("img");
-        img.className = "logo listening-cover";
-        img.alt = "";
-        img.src = src;
-        return img;
+    // reused across polls and range switches
+    var artistCovers = {};
+
+    function artistCover(artist) {
+        if (!artist.image) {
+            var empty = document.createElement("span");
+            empty.className = "dither-cover";
+            return empty;
+        }
+        artistCovers[artist.image] = artistCovers[artist.image] || ditherCover(artist.image, artist.imageLarge);
+        return artistCovers[artist.image];
     }
 
     // each row renders one kind of data for the picked range, and hides itself when spotify sent none
@@ -48,10 +56,11 @@
         artists: function (out, range) {
             var items = top.artists && top.artists[range];
             if (!items || !items.length) return false;
-            items.forEach(function (artist, i) {
-                out.append(i ? ", " : "");
-                if (artist.image) out.append(cover(artist.image));
-                out.append(link(artist.name, artist.url));
+            items.forEach(function (artist) {
+                var card = document.createElement("span");
+                card.className = "top-artist";
+                card.append(artistCover(artist), link(artist.name, artist.url));
+                out.append(card);
             });
             return true;
         },

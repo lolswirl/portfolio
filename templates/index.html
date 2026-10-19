@@ -44,8 +44,8 @@
 
     {% if config.extra.now_playing %}
         <div class="music">
-            <p class="now listening" hidden><span class="now-label">listening</span> <img class="logo listening-cover" alt="" /><a class="listening-title" target="_blank" rel="noopener"></a> <span class="listening-artist"></span></p>
-            <p class="now on-repeat" hidden><span class="now-label">on repeat</span> <img class="logo listening-cover" alt="" /><a class="listening-title" target="_blank" rel="noopener"></a> <span class="listening-artist"></span></p>
+            <div class="now listening" hidden><span class="dither-cover listening-cover"></span><span class="now-text"><span class="now-label">listening</span><a class="listening-title" target="_blank" rel="noopener"></a><span class="listening-artist"></span></span></div>
+            <div class="now on-repeat" hidden><span class="dither-cover listening-cover"></span><span class="now-text"><span class="now-label">on repeat</span><a class="listening-title" target="_blank" rel="noopener"></a><span class="listening-artist"></span></span></div>
         </div>
     {% endif %}
 
