@@ -215,11 +215,18 @@ nothing gets merged without me reviewing it first.
 before the site, there were python scripts. in january 2025 i wrote a cast timeline in python: each ability had a cast time, cooldown, and haste scaling, a player object applied mistweaver's rules as it went (like chi-ji stacks making enveloping mist cast faster), and matplotlib drew each ramp as a row so two could be compared. the spell timeline is the same idea, rebuilt for the browser.
 
 <div class="screenshot-row">
-{{<screenshot src="old-viv-timeline.png" alt="python, jan 2025" />}}
-{{<screenshot src="viv-timeline.png" alt="spell timeline, now" />}}
-{{<screenshot src="old-env-timeline.png" alt="python, jan 2025" />}}
-{{<screenshot src="env-timeline.png" alt="spell timeline, now" />}}
+{{<screenshot src="v1-viv-timeline.png" alt="python, jan 2025" />}}
+{{<screenshot src="v2-viv-timeline.png" alt="python, v2" />}}
 </div>
+
+{{<screenshot src="v3-viv-timeline.png" alt="spell timeline, now" />}}
+
+<div class="screenshot-row">
+{{<screenshot src="v1-env-timeline.png" alt="python, jan 2025" />}}
+{{<screenshot src="v2-env-timeline.png" alt="python, v2" />}}
+</div>
+
+{{<screenshot src="v3-env-timeline.png" alt="spell timeline, now" />}}
 
 one of those scripts is, surprisingly, still in use. wow lets you replace its icons with your own `.tga` files, and i use the upscaled set from acidweb's [clean icons: mechagnome edition](https://github.com/AcidWeb/Clean-Icons-Mechagnome-Edition), which look sharper than the originals. the script scans the site's spell data for the icons it needs, converts those files to png, and saves them to the site's icon folder, so the site shows the same icons i see in game.
 
