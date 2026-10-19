@@ -20,5 +20,5 @@ edu = [
 ]
 +++
 
-also known as _swirl_. backend developer in nyc, working on real-time trading systems.
-on the side, i build tools that help world of warcraft players (me included) get better at their craft. <a class="more" href="/about/">more →</a>
+backend engineer in nyc who builds things constantly, at work and for fun.
+by day that's real-time trading systems, on the side it's theorycrafting tools for world of warcraft healers, discord bots, custom keyboards, and a smart home running on raspberry pis. <a class="more" href="/about/">more →</a>

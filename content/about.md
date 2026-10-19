@@ -5,7 +5,7 @@ path = "about"
 
 hi again. i'm ronald, though most people online know me as _swirl_.
 
-i'm a software engineer in new york city, working on trading systems at macquarie group.
+i'm a software engineer in new york city, and i'm always building something, at work or not.
 
 ## work
 
@@ -15,13 +15,15 @@ after that i spent a couple of years at smt, building the software behind tennis
 
 in 2021 i moved to macquarie, where i work on the systems traders use to book and manage credit trades. it's mostly c++ and python, and the part i like most is how close it is to the people using it. a lot of my day is on the trading floor, working through problems with traders while their trades are live.
 
+across all of it, i'd rather build something strong and useful than something quick. i like working close to the people who use what i make, and i care about it holding up when it matters, in the middle of a live match or while a trade is going through. a lot of my favorite work started as a tool i made for myself, until the people around me started using it, and then other teams did too. seeing people get real use out of something i built is the most satisfying part of the job.
+
 want to know more? feel free to [get in touch](#get-in-touch)! :)
 
 ## video games
 
 ### world of warcraft
 
-i've played wow since cataclysm, and i've mained mistweaver monk since mists of pandaria. healing competitively has been my focus ever since, and i've reached world rank 20 in raid and earned 0.1% titles in mythic+ across several seasons. i write the [mistweaver guide](https://www.wowhead.com/guide/classes/monk/mistweaver/overview-pve-healer) on wowhead, and i'm a veteran and moderator in peak of serenity, the monk community discord.
+i've played wow since cataclysm, almost 600 days of /played across it all, and i've mained mistweaver monk since mists of pandaria. healing competitively has been my focus ever since, and i've reached world rank 20 in raid and earned 0.1% titles in mythic+ across several seasons. i write the [mistweaver guide](https://www.wowhead.com/guide/classes/monk/mistweaver/overview-pve-healer) on wowhead, and i'm a veteran and moderator in peak of serenity, the monk community discord.
 
 most of my side projects come from the game. it started because i had questions about my own spec that no tool answered, and that turned into [wait, i'm ramping!](/projects/waitimramping/), a site of planning and analysis tools for healers. from there i started contributing to the tools other players already use. i maintain the mistweaver module in [wowanalyzer](/projects/wowanalyzer/), and built the mistweaver model in [qe live](/projects/questionably-epic/). i also write [addons](/projects/swirl-addons/), mostly small ones that fix one thing.
 
@@ -29,7 +31,9 @@ i like helping other healers get better and enjoy the role more.
 
 ### other games
 
-outside of wow, i mostly play games about building, surviving, or tending to things, like subnautica, terraria, minecraft, don't starve, oxygen not included, stardew valley, and graveyard keeper. super meat boy is the odd one out, and a throwback. pokemon goes back the furthest. i started on a game boy advance in kindergarten and kept going through the ds and the switch.
+outside of wow, i mostly play games about building and surviving, like subnautica, terraria, minecraft, don't starve, and oxygen not included. terraria is the one that stuck, at around 3,000 hours. then there are the slower games about tending to things, like stardew valley, where i've put in about 2,000 hours, and graveyard keeper.
+
+a couple go back much further, like super meat boy and pokemon. i started pokemon on a game boy advance in kindergarten and kept going through the ds and the switch.
 
 ## home
 
