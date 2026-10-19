@@ -128,3 +128,37 @@ if (tocLinks.length) {
     document.addEventListener("scroll", markCurrent, { passive: true });
     markCurrent();
 }
+
+// homepage title types in like a terminal, ending on a blinking cursor
+if (document.documentElement.classList.contains("typing")) {
+    var title = document.querySelector(".home .page-header");
+    var text = title.textContent + ".";
+    var cursor = document.createElement("span");
+    cursor.className = "cursor";
+    var chars = Array.from(text).map(function (ch, i) {
+        var span = document.createElement("span");
+        span.textContent = ch;
+        span.className = i === text.length - 1 ? "pending dot" : "pending";
+        span.setAttribute("aria-hidden", "true");
+        return span;
+    });
+
+    title.textContent = "";
+    title.setAttribute("aria-label", text);
+    title.classList.add("typed");
+    title.append(cursor);
+    chars.forEach(function (span) { title.append(span); });
+    document.documentElement.classList.remove("typing");
+
+    var typedCount = 0;
+    setTimeout(function () {
+        var timer = setInterval(function () {
+            chars[typedCount].classList.remove("pending");
+            chars[typedCount].after(cursor);
+            if (++typedCount === chars.length) {
+                clearInterval(timer);
+                cursor.classList.add("done");
+            }
+        }, 40);
+    }, 300);
+}

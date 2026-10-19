@@ -217,6 +217,41 @@ h4::before { content: "#### "; color: var(--primary-color); }
   font-size: 1.6em;
 }
 
+/* homepage title typing in (site.js) */
+.typing .home .page-header {
+  visibility: hidden;
+}
+
+.page-header.typed::after {
+  content: none;
+}
+
+.page-header .dot {
+  color: var(--primary-color);
+  font-size: 1.6em;
+}
+
+.page-header .pending {
+  visibility: hidden;
+}
+
+.page-header .cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.8em;
+  margin-left: 0.08em;
+  vertical-align: -0.06em;
+  background-color: var(--primary-color);
+}
+
+.page-header .cursor.done {
+  animation: cursor-blink 1s steps(1) 3 forwards;
+}
+
+@keyframes cursor-blink {
+  50%, 100% { opacity: 0; }
+}
+
 /* homepage section labels and headings inside pages share one look */
 h2.label,
 .body h2,

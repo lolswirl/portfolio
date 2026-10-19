@@ -46,3 +46,8 @@ try {
     var savedMode = localStorage.getItem("oscilloscope");
     if (savedMode === "string" || savedMode === "off") document.documentElement.dataset.oscilloscopeMode = savedMode;
 } catch (e) {}
+
+// hide the homepage title before first paint when it's about to type in (site.js)
+if (location.pathname === "/" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("typing");
+}
