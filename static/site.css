@@ -183,6 +183,41 @@ body:not(:has(.oscilloscope-footer)) .oscilloscope-toggle {
   display: block;
 }
 
+/* back to top, shown once scrolled (site.js) */
+.to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  padding: 0.4rem;
+  border: none;
+  background: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms, visibility 150ms;
+}
+
+.to-top.shown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.to-top:hover {
+  color: var(--hover-color);
+}
+
+.to-top svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+:root:not([data-oscilloscope-mode="off"]) body:has(.oscilloscope-footer) .to-top {
+  bottom: calc(64px + 1rem);
+}
+
 /* tooltips look like a hovered link, a flat accent block with white text */
 .social-tooltip {
   background-color: var(--secondary-color);

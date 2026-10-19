@@ -1,5 +1,18 @@
 document.querySelector(".theme-toggle").addEventListener("click", toggleTheme);
 
+// back to top
+var toTop = document.querySelector(".to-top");
+toTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+// short pages like the homepage never scroll 300px, so reaching the bottom counts too
+function updateToTop() {
+    var bottom = window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    toTop.classList.toggle("shown", window.scrollY > 300 || bottom);
+}
+window.addEventListener("scroll", updateToTop, { passive: true });
+updateToTop();
+
 // collapsible notes
 document.querySelectorAll(".note-toggle").forEach(function (button) {
     var content = button.nextElementSibling;
