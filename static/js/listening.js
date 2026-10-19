@@ -1,4 +1,4 @@
-// spotify lines from functions/api/now-playing.js, hidden until there's data
+// spotify data from functions/api/now-playing.js
 (function () {
     function fill(row, track) {
         if (!track) return;
@@ -51,7 +51,7 @@
         return artistCovers[artist.image];
     }
 
-    // each row renders one kind of data for the picked range, and hides itself when spotify sent none
+    // one renderer per kind of row
     var renderers = {
         artists: function (out, range) {
             var items = top.artists && top.artists[range];
@@ -78,7 +78,7 @@
             });
             return true;
         },
-        // genres as #tags, like the tags at the top of a project page
+        // genres as #tags
         genres: function (out, range) {
             var genres = top.genres && top.genres[range];
             if (!genres || !genres.length) return false;

@@ -1,4 +1,4 @@
-// spotify now playing and most played, using SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_REFRESH_TOKEN
+// spotify now playing and most played
 
 const CACHE_SECONDS = 15;
 const TOP_SECONDS = 6 * 60 * 60;
@@ -43,8 +43,7 @@ async function getNow(headers) {
     return last ? { ...toTrack(last.track), isPlaying: false } : null;
 }
 
-// short is 4 weeks, medium 6 months, and long 1 year. 20 per list gives genres and averages more to
-// work with, while the page only shows the top 5
+// short is 4 weeks, medium 6 months, long 1 year. 20 per list feeds the genres and averages
 async function getTop(headers, type, range) {
     const top = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${range}_term&limit=20`, { headers });
     if (!top.ok) throw new Error(`top ${type} failed: ${top.status}`);
@@ -58,7 +57,7 @@ function topGenres(artists) {
     return Object.keys(counts).sort((a, b) => counts[b] - counts[a]).slice(0, 4);
 }
 
-// average track popularity (0-100) and the span of release years. either is null if spotify leaves the field out
+// average popularity (0-100) and release year span
 function trackStats(tracks) {
     const popularity = tracks.map((t) => t.popularity).filter((p) => typeof p === "number");
     const years = tracks.map((t) => parseInt(t.album?.release_date, 10)).filter((y) => y > 0);
@@ -87,14 +86,13 @@ async function getTopLists(headers) {
     };
 }
 
-// total liked songs (needs the user-library-read scope). it's optional, so a failure is just null
+// total liked songs (needs the user-library-read scope)
 async function getSavedCount(headers) {
     const saved = await fetch("https://api.spotify.com/v1/me/tracks?limit=1", { headers });
     return saved.ok ? (await saved.json()).total ?? null : null;
 }
 
-// top lists change slowly and spotify rate-limits them hard, so they're cached for hours on their own.
-// when spotify refuses, the last good lists are served again instead of nothing
+// top lists are cached for hours, falling back to the last good copy when spotify refuses
 async function cachedTopLists(request, getHeaders, waitUntil) {
     const cache = caches.default;
     const fresh = new Request(new URL("/api/now-playing/top", request.url));
@@ -131,7 +129,7 @@ function allowLocalhost(request, res) {
 }
 
 export async function onRequestGet({ request, env, waitUntil }) {
-    // every visitor polls, so share one spotify lookup across them for a few seconds
+    // one spotify lookup shared across visitors for a few seconds
     const cache = caches.default;
     const key = new Request(new URL("/api/now-playing", request.url));
     const cached = await cache.match(key);

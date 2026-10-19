@@ -1,6 +1,6 @@
-// spotify covers as a 1-bit dither in the accent color, dissolving into the real art on hover
+// dithered spotify covers
 (function () {
-    // 4x4 bayer order, used as dither thresholds and as the dissolve order
+    // 4x4 bayer order, for the dither and the dissolve
     var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
     // dots across the 56px cover
     var GRID = 37;

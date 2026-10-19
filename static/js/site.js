@@ -5,7 +5,7 @@ var toTop = document.querySelector(".to-top");
 toTop.addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
-// short pages like the homepage never scroll 300px, so reaching the bottom counts too
+// short pages never scroll 300px, so the bottom counts too
 function updateToTop() {
     var bottom = window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
     toTop.classList.toggle("shown", window.scrollY > 300 || bottom);
@@ -24,21 +24,18 @@ document.querySelectorAll(".note-toggle").forEach(function (button) {
     });
 });
 
-// bold text that opens a paragraph or list item is a lead-in ("**holy paladin:** ...");
-// mark it so it can take the accent color. bold mid-sentence is left alone.
+// bold text opening a paragraph or list item is a lead-in
 document.querySelectorAll(".body p, .body li").forEach(function (el) {
     var first = Array.from(el.childNodes).find(function (n) { return n.nodeType !== 3 || n.textContent.trim(); });
     if (first && first.nodeName === "STRONG") first.classList.add("lead");
 });
 
-// bold numbers ("**3,000** hours") get the accent too, wherever they sit in a sentence
+// bold numbers get the accent too
 document.querySelectorAll(".body strong").forEach(function (el) {
     if (/^[\d.,%+]+$/.test(el.textContent.trim())) el.classList.add("lead");
 });
 
-// paragraphs written as "**key:** value" lines become the same key/value grid as
-// the page metadata. every line has to start with a bold "key:", so ordinary
-// paragraphs that merely open with bold text are left alone.
+// paragraphs of "**key:** value" lines become a metadata grid
 document.querySelectorAll(".body p").forEach(function (p) {
     var lines = [[]];
     p.childNodes.forEach(function (node) {
@@ -69,8 +66,7 @@ document.querySelectorAll(".body p").forEach(function (p) {
     p.replaceWith(grid);
 });
 
-// every number in article text is bolded in the accent, skipping code, links, headings, and the
-// metadata grids, and leaving numbers that are part of a word ("3d", "s1") alone
+// numbers in article text are bolded in the accent
 var NUMBER = /(^|[^\w.#])(\d+(?:[.,]\d+)*%?)(?!\w)/g;
 var SKIP = "a, code, pre, strong, b, h1, h2, h3, h4, .meta, button, figcaption";
 var walker = document.createTreeWalker(document.querySelector(".body") || document.createElement("div"), NodeFilter.SHOW_TEXT, {
@@ -104,10 +100,8 @@ if (tocLinks.length) {
         .map(function (a) { return document.getElementById(decodeURIComponent(a.hash.slice(1))); })
         .filter(Boolean);
 
-    // a heading becomes current once it passes a trigger line. the line slides from
-    // near the top of the screen (page top) to near the bottom (page bottom), so even
-    // short pages and short final sections pass through every heading in order.
-    // a clicked toc entry wins until the reader scrolls on their own.
+    // a heading becomes current once it passes a trigger line that slides from the top of the
+    // screen to the bottom as the page scrolls, so short final sections still activate
     var clicked = null;
 
     var markCurrent = function () {
@@ -142,7 +136,7 @@ if (tocLinks.length) {
     markCurrent();
 }
 
-// homepage title types in like a terminal, then the cursor and the dot trade places a few times
+// homepage title types in like a terminal
 if (document.documentElement.classList.contains("typing")) {
     var title = document.querySelector(".home .page-header");
     var text = title.textContent + ".";

@@ -1,4 +1,4 @@
-/* palette and type carried over from apollo + the old apollo.css overrides */
+/* palette and type */
 :root {
   --font-size-base: 13.5px;
   --text-font: "Jetbrains Mono", monospace;
@@ -12,7 +12,7 @@
 :root.light {
   --text-0: #212121;
   --text-1: #666666;
-  /* text-2 is darkened to reach 4.5:1 (wcag aa) against bg-0 */
+  /* darkened for wcag aa contrast */
   --text-2: #6c6c6c;
   --bg-0: #efefef;
   --bg-1: #e4e4e4;
@@ -46,7 +46,7 @@ html {
   line-height: var(--line-height);
 }
 
-/* an accent outline for keyboard focus only, so mouse clicks don't leave a ring behind */
+/* accent outline for keyboard focus only */
 :focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
@@ -99,7 +99,7 @@ code, pre, kbd, samp {
 
 /* nav */
 
-/* sticky header, padded so it keeps the body's top gap when stuck */
+/* sticky header */
 nav {
   position: sticky;
   top: 0;
@@ -154,7 +154,7 @@ nav {
   cursor: pointer;
 }
 
-/* one icon per oscilloscope mode, dimmed when off, and hidden on pages without one */
+/* one icon per oscilloscope mode */
 .oscilloscope-toggle img {
   display: none;
 }
@@ -183,7 +183,7 @@ body:not(:has(.oscilloscope-footer)) .oscilloscope-toggle {
   display: block;
 }
 
-/* back to top, shown once scrolled (site.js) */
+/* back to top (site.js) */
 .to-top {
   position: fixed;
   right: 1rem;
@@ -218,7 +218,7 @@ body:not(:has(.oscilloscope-footer)) .oscilloscope-toggle {
   bottom: calc(64px + 1rem);
 }
 
-/* tooltips look like a hovered link, a flat accent block with white text */
+/* tooltips */
 .social-tooltip {
   background-color: var(--secondary-color);
   color: var(--hover-color);
@@ -290,7 +290,7 @@ h4::before { content: "#### "; color: var(--primary-color); }
   display: none;
 }
 
-/* homepage section labels and headings inside pages share one look */
+/* section labels and page headings */
 h2.label,
 .body h2,
 .body h3 {
@@ -305,7 +305,7 @@ h2.label,
   margin-top: 1.75rem;
 }
 
-/* a heading jumped to from a link flashes, then stays in the accent while it's the target */
+/* linked heading flash */
 .body :is(h2, h3) {
   scroll-margin-top: 1.5rem;
 }
@@ -327,9 +327,7 @@ h2.label,
   }
 }
 
-/* heading style, picked by `delimiter` in config.toml: applies to homepage
-   section labels and ## headings, and ### headings repeat the delimiter
-   (default "" keeps ## / ###) */
+/* heading style, picked by `delimiter` in config.toml */
 h2.label::before { color: var(--primary-color); }
 [data-delim="a"] :is(h2.label, .body h2)::before { content: "~/"; }
 [data-delim="a"] .body h3::before { content: "~/../"; }
@@ -347,7 +345,7 @@ h2.label::before { color: var(--primary-color); }
 [data-delim="e"] :is(h2.label, .body h2, .body h3)::before { content: none; }
 [data-delim="e"] :is(h2.label, .body h2)::after { content: "."; color: var(--primary-color); }
 [data-delim="e"] .body h3::after { content: ".."; color: var(--primary-color); }
-/* the first space after a css escape is swallowed by the escape, hence two */
+/* a css escape swallows the next space, hence two */
 [data-delim="f"] :is(h2.label, .body h2)::before { content: "\169B9  "; }
 [data-delim="f"] .body h3::before { content: "\169B9\169B9  "; }
 
@@ -381,7 +379,7 @@ a:has(img) {
   color: var(--hover-color);
 }
 
-/* asides (quotes, code, notes) share a 2px left rule instead of boxes */
+/* asides share a 2px left rule */
 blockquote {
   border-left: 2px solid var(--border-color);
   color: var(--text-1);
@@ -499,7 +497,7 @@ time,
   color: var(--text-1);
 }
 
-/* page metadata as a grid, with dim labels and values beside them */
+/* page metadata grid */
 .meta {
   display: grid;
   grid-template-columns: 6ch 1fr;
@@ -516,7 +514,7 @@ time,
   gap: 0 0.5em;
 }
 
-/* a thin accent underline makes metadata links read as clickable without competing with the article */
+/* metadata links */
 .meta a {
   border-bottom: 1px solid var(--primary-color);
 }
@@ -536,9 +534,7 @@ time,
   color: inherit;
 }
 
-/* "**key:** value" paragraphs in articles, turned into a grid by site.js:
-   key column fits the longest key, values keep their normal spacing,
-   and italic figures read as bright upright numbers */
+/* "**key:** value" grids (site.js) */
 .meta.facts {
   grid-template-columns: max-content 1fr;
   margin: 1rem 0;
@@ -558,7 +554,7 @@ time,
   margin-top: 1.5rem;
 }
 
-/* the back link lives inside the header's 3rem top gap, so titles line up across pages */
+/* back link sits in the header's top gap so titles line up */
 .back {
   display: block;
   width: fit-content;
@@ -582,7 +578,7 @@ time,
   margin: 0.5rem 0;
 }
 
-/* first paragraph under a page title matches the homepage intro spacing */
+/* first paragraph under a page title */
 .body > p:first-child {
   margin-top: 0.5rem;
 }
@@ -614,7 +610,7 @@ time,
   color: var(--primary-color);
 }
 
-/* about page music stats, laid out like the page metadata grid */
+/* about page music stats */
 .music-stats {
   grid-template-columns: max-content 1fr;
   gap: 0.4rem 1.5ch;
@@ -641,7 +637,7 @@ time,
   margin-left: 1ch;
 }
 
-/* popularity as a thin bar filled to the score */
+/* popularity bar */
 .popularity-bar {
   display: inline-block;
   width: 10ch;
@@ -799,7 +795,7 @@ body:has(.oscilloscope-footer) {
   object-fit: contain;
 }
 
-/* single-color logos (black ring, navy eagle) turn white in dark mode */
+/* single-color logos turn white in dark mode */
 :root.dark .logo.mono {
   filter: brightness(0) invert(1);
 }
@@ -856,8 +852,7 @@ a.row-title::before {
 [data-marker="f"] a.row-title::before { content: "↳ "; }
 [data-marker="g"] a.row-title::before { content: "⇒ "; }
 [data-marker="h"] a.row-title::before { content: "➜ "; }
-/* i: numbered from 0, counting only rows that link somewhere (projects, posts);
-   numbers sit right-aligned in a 2-character slot so titles stay aligned past 9 */
+/* i: numbered from 0, counting only linked rows */
 [data-marker="i"] .rows { counter-reset: entry -1; }
 [data-marker="i"] .row:has(> a.row-title) { counter-increment: entry; }
 [data-marker="i"] a.row-title::before {
@@ -881,7 +876,7 @@ a.row-desc,
   border-bottom: none;
 }
 
-/* links size to their own text, and the margin pushes the date right instead */
+/* the margin pushes the date right */
 a.row-desc {
   flex: 0 1 auto;
   margin-right: auto;
@@ -897,7 +892,7 @@ a.row-desc {
   color: var(--primary-color);
 }
 
-/* stack labels share one width so the item lists line up */
+/* stack labels share one width */
 .stack-label {
   width: 6ch;
 }
@@ -921,7 +916,7 @@ a.row-desc {
     order: 3;
   }
 
-  /* on phones each role shares a line with its dates, and the company goes below */
+  /* on phones the company goes below the role */
   .exp .row:not(.earlier) {
     padding: 0.75rem 0 0.4rem;
   }
@@ -939,7 +934,7 @@ a.row-desc {
     margin-left: auto;
   }
 
-  /* a zero-height full-width item breaks the line, so the company link stays only as wide as its text */
+  /* a zero-height full-width item forces the line break */
   .exp .row:not(.earlier)::after {
     content: "";
     order: 3;
@@ -958,7 +953,7 @@ a.row-desc {
     display: none;
   }
 
-  /* stack rows are short enough to stay on one line */
+  /* stack rows stay on one line */
   .stack span.row-desc {
     flex-basis: auto;
     order: 0;
@@ -987,8 +982,7 @@ pre {
   overflow-wrap: anywhere;
 }
 
-/* language label in its own row at the top, dim like the metadata keys,
-   so long first lines can't run underneath it */
+/* language label in its own row at the top */
 pre:has(> code[data-lang]:not([data-lang="plain"])) {
   padding-top: 1.9em;
 }
@@ -1066,7 +1060,7 @@ pre.giallo code {
 
 /* note component */
 
-/* a lighter gray block with an accent rule marks it as interactive, and the toggle reads like body text with +/− */
+/* note block and toggle */
 .note-container {
   border-left: 2px solid var(--primary-color);
   background-color: var(--bg-1);
@@ -1130,7 +1124,7 @@ pre.giallo code {
 
 /* tool cards (waitimramping writeup) */
 
-/* mirrors waitimramping's home page, with two large lead cards above smaller ones three across */
+/* mirrors waitimramping's home page */
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

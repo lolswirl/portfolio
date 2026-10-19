@@ -1,6 +1,4 @@
-// homepage oscilloscope with two modes, cycled by the nav button (wave -> string -> off):
-// "wave" layers drifting sine waves, "string" simulates a damped vibrating string.
-// both bend toward the cursor, pluck on click, and react to the beat while spotify plays.
+// homepage oscilloscope: drifting sine waves or a damped vibrating string
 (function () {
     var canvas = document.querySelector(".oscilloscope");
     if (!canvas) return;
@@ -29,14 +27,14 @@
         var PLUCK_ROUND = 20; // px over which a pluck's peak is rounded off
         var plucks = [];
 
-        // wave number (rad/px), base speed (rad/s), and weight, with speeds that drift so it never settles into a rhythm
+        // wave number (rad/px), base speed (rad/s), and weight
         var layers = [
             { k: 0.03, speed: 3.3, weight: 0.6, phase: 0 },
             { k: 0.075, speed: -5.9, weight: 0.3, phase: 0 },
             { k: 0.17, speed: 11, weight: 0.1, phase: 0 },
         ];
 
-        // each beat starts at its own random spot and ripples outward, and this returns 0..1 for the strongest pulse at x
+        // 0..1 for the strongest beat ripple at x
         function beatAt(x, t) {
             var k = Math.floor(t / BEAT_PERIOD), strongest = 0;
             for (var n = k - Math.ceil(W / BEAT_SPEED / BEAT_PERIOD) - 1; n <= k; n++) {
@@ -172,7 +170,7 @@
                 carry = 0;
                 setupModes();
             },
-            // strength is the pull in px, up or down at random, so a click (14) pulls 14px
+            // strength is the pull in px
             pluck: function (x, strength) { pluckAt(x, strength * (Math.random() < 0.5 ? -1 : 1)); },
             step: function (t, dt) {
                 // while music plays, each beat plucks a random spot
@@ -210,7 +208,7 @@
         prevTime = t;
         var engine = engines[mode()] || wave;
         pointer.pull += ((pointer.over ? 1 : 0) - pointer.pull) * 0.15;
-        // occasional random twitch (the string has its own random taps)
+        // occasional random twitch
         if (engine === wave && Math.random() < dt * 0.25) wave.pluck(Math.random() * W, 3 + Math.random() * 3);
         engine.step(t, dt);
 
@@ -262,7 +260,7 @@
 
     window.addEventListener("resize", start);
 
-    // nav button cycles wave -> string -> off, remembered across visits (theme.js applies it on load)
+    // nav button cycles wave -> string -> off
     var toggle = document.querySelector(".oscilloscope-toggle");
     if (toggle) {
         toggle.addEventListener("click", function () {

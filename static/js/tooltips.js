@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.style.display = 'none';
         }
 
-        // keyboard focus shows the same tooltip as hovering
+        // keyboard focus too
         link.addEventListener('mouseenter', show);
         link.addEventListener('focus', show);
         link.addEventListener('mouseleave', hide);

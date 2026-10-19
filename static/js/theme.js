@@ -40,7 +40,7 @@ function toggleTheme() {
 applyTheme();
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
 
-// apply the saved oscilloscope mode (wave, string, or off) before first paint (oscilloscope.js)
+// apply the saved oscilloscope mode before first paint
 document.documentElement.dataset.oscilloscopeMode = "wave";
 try {
     var savedMode = localStorage.getItem("oscilloscope");
