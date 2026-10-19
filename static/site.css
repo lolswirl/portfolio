@@ -546,7 +546,8 @@ body:has(.oscilloscope-footer) {
 }
 
 .more {
-  margin-left: 0.25em;
+  display: inline-block;
+  white-space: nowrap;
   color: var(--primary-color);
   font-weight: 700;
   border-bottom: none;
