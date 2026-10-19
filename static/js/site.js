@@ -18,6 +18,11 @@ document.querySelectorAll(".body p, .body li").forEach(function (el) {
     if (first && first.nodeName === "STRONG") first.classList.add("lead");
 });
 
+// bold numbers ("**3,000** hours") get the accent too, wherever they sit in a sentence
+document.querySelectorAll(".body strong").forEach(function (el) {
+    if (/^[\d.,%+]+$/.test(el.textContent.trim())) el.classList.add("lead");
+});
+
 // paragraphs written as "**key:** value" lines become the same key/value grid as
 // the page metadata. every line has to start with a bold "key:", so ordinary
 // paragraphs that merely open with bold text are left alone.
@@ -49,6 +54,34 @@ document.querySelectorAll(".body p").forEach(function (p) {
         grid.append(k, v);
     });
     p.replaceWith(grid);
+});
+
+// every number in article text is bolded in the accent, skipping code, links, headings, and the
+// metadata grids, and leaving numbers that are part of a word ("3d", "s1") alone
+var NUMBER = /(^|[^\w.#])(\d+(?:[.,]\d+)*%?)(?!\w)/g;
+var SKIP = "a, code, pre, strong, b, h1, h2, h3, h4, .meta, button";
+var walker = document.createTreeWalker(document.querySelector(".body") || document.createElement("div"), NodeFilter.SHOW_TEXT, {
+    acceptNode: function (n) {
+        return /\d/.test(n.textContent) && !n.parentElement.closest(SKIP) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    },
+});
+var numberNodes = [];
+while (walker.nextNode()) numberNodes.push(walker.currentNode);
+numberNodes.forEach(function (node) {
+    var text = node.textContent, out = document.createDocumentFragment(), last = 0, match;
+    NUMBER.lastIndex = 0;
+    while ((match = NUMBER.exec(text))) {
+        var start = match.index + match[1].length;
+        out.append(text.slice(last, start));
+        var strong = document.createElement("strong");
+        strong.className = "lead";
+        strong.textContent = match[2];
+        out.append(strong);
+        last = start + match[2].length;
+    }
+    if (!last) return;
+    out.append(text.slice(last));
+    node.replaceWith(out);
 });
 
 // highlight the toc entry for the section currently on screen
