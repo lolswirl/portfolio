@@ -55,9 +55,13 @@ delves report themselves as scenarios, not by an instance type of their own, so 
 
 each category has a default loadout, and individual instances can override it. a raid can override the new "all raids" default, a dungeon can override the dungeon default, and talents can be overridden without changing the spec.
 
+{{<screenshot src="config.png" alt="a raid overriding the default spec and addons, but not talents" />}}
+
 ### the reminder
 
 the reminder only shows the parts that are wrong. if your gear set matches but your talents don't, you see one row for talents. if everything already matches, nothing appears.
+
+{{<screenshot src="reminder.png" alt="the reminder on entering the nighthold" />}}
 
 applying a change waits for the game to confirm it. the button disables while the change goes through, the row updates when the game reports success, and if the game reports a failure, like trying to swap spec mid-cast, the button comes back so you can try again:
 

@@ -22,9 +22,7 @@ wow's addon api gives you frames, textures, and font strings, and not much else.
 
 swirl framework is my set of those pieces, written once and shared by my addons. it's open source under the mit license.
 
-<!-- screenshot: a full window, e.g. instance loadouts' config
-![instance loadouts config window](window.png)
--->
+{{<screenshot src="components.png" alt="every component in one window" />}}
 
 ## why i built it
 
@@ -39,9 +37,9 @@ i wrote this to replace it, and moved instance loadouts over the same day. [swir
 - **controls:** buttons, icon buttons, toggles, sliders, dropdowns, text boxes, color pickers, and an x/y position control
 - **notifications:** toasts, and confirm dialogs that can dim and attach to a window
 
-<!-- screenshot: controls close up (toggles, sliders, dropdowns)
-![controls](controls.png)
--->
+{{<screenshot src="confirm.png" alt="a confirm dialog attached to its window, dimming it" />}}
+
+{{<screenshot src="toast.png" alt="a toast" />}}
 
 ## how it works
 
@@ -62,7 +60,7 @@ every file starts with `local _, SF = ...`, which gives it the host addon's priv
 
 colors, fonts, padding, and sizes all come from one theme table. components read from it instead of hard-coding values, so a change there applies everywhere.
 
-the accent color follows your class. at load time the theme replaces its default accent with your class color, plus a dimmed and a faded version of it:
+the accent color [follows your class](https://warcraft.wiki.gg/wiki/Class_colors). at load time the theme replaces its default accent with your class color, plus a dimmed and a faded version of it:
 
 ```lua
 function SF.InitTheme()
@@ -74,11 +72,14 @@ function SF.InitTheme()
 end
 ```
 
-a monk sees green and a mage sees blue, in every addon built on it.
+a <span class="shaman">shaman</span> sees blue, a <span class="monk">monk</span> green, a <span class="demon-hunter">demon hunter</span> purple, and a <span class="death-knight">death knight</span> red, in every addon built on it.
 
-<!-- screenshot: the same window in two class colors
-![class colors](class-colors.png)
--->
+<div class="screenshot-row">
+{{<screenshot src="shaman.png" alt="shaman" />}}
+{{<screenshot src="monk.png" alt="monk" />}}
+{{<screenshot src="demon-hunter.png" alt="demon hunter" />}}
+{{<screenshot src="death-knight.png" alt="death knight" />}}
+</div>
 
 ## stack
 

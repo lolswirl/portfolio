@@ -26,6 +26,8 @@ most healers get comfortable at "i know my spells and mostly how to use them." w
 
 i wanted a way to plan that ahead of time, and nothing really did it. so i built one.
 
+{{<screenshot src="whendoiramp.png" alt="when do i ramp?: a ramp that needs to start 6 seconds before a mechanic" width="420px" />}}
+
 ## why i built it
 
 the questions came first. i'd had them for years without sitting down to answer them properly, and the only tool i had was a spreadsheet.
@@ -49,6 +51,12 @@ so it became a website, which was also a reason in itself. my day job is backend
 those five are on the front page. the rest are [analysis pages](https://waitimramping.com/analysis), each answering one specific question about the math behind a spell or mechanic.
 
 some compare two spells directly, some break down how healing is distributed across a cooldown, and some plot a single value so you can see how it scales. they all use the same underlying model.
+
+{{<screenshot src="sg-vs-docj.png" alt="sheilun's gift against dance of chi-ji, by clouds and targets" />}}
+
+{{<screenshot src="hotjs.png" alt="heart of the jade serpent's cooldown reduction turned into extra casts" />}}
+
+{{<screenshot src="damage-comparison.png" alt="healing from each damage rotation as the target count grows" />}}
 
 ## how it works
 
@@ -205,6 +213,13 @@ nothing gets merged without me reviewing it first.
 ### history
 
 before the site, there were python scripts. in january 2025 i wrote a cast timeline in python: each ability had a cast time, cooldown, and haste scaling, a player object applied mistweaver's rules as it went (like chi-ji stacks making enveloping mist cast faster), and matplotlib drew each ramp as a row so two could be compared. the spell timeline is the same idea, rebuilt for the browser.
+
+<div class="screenshot-row">
+{{<screenshot src="old-viv-timeline.png" alt="python, jan 2025" />}}
+{{<screenshot src="viv-timeline.png" alt="spell timeline, now" />}}
+{{<screenshot src="old-env-timeline.png" alt="python, jan 2025" />}}
+{{<screenshot src="env-timeline.png" alt="spell timeline, now" />}}
+</div>
 
 one of those scripts is, surprisingly, still in use. wow lets you replace its icons with your own `.tga` files, and i use the upscaled set from acidweb's [clean icons: mechagnome edition](https://github.com/AcidWeb/Clean-Icons-Mechagnome-Edition), which look sharper than the originals. the script scans the site's spell data for the icons it needs, converts those files to png, and saves them to the site's icon folder, so the site shows the same icons i see in game.
 

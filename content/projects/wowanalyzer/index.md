@@ -29,6 +29,8 @@ i maintain its mistweaver monk module, and i've also worked on holy paladin and 
 
 the module works in two stages. first, normalizers go through the log and add links between related events: this heal came from that talent proc, or this damage event caused those healing events. then analyzers listen for the events they care about, like heals from one spell or a buff being applied, and use those links to attribute healing to the right source. their results feed the statistics and the guide that grades each cooldown.
 
+{{<screenshot src="statistics.png" alt="talent statistics" />}}
+
 an analyzer is only active if the player took its talent, and it subscribes to the events it needs. this is part of the spiritfont module's setup:
 
 ```ts
@@ -72,6 +74,12 @@ some of what i've shipped:
 - **upkeep:** hero talent statistics, the tier set modules, and patch updates for 12.0.5 and 12.1
 - **bug fixes:** an ancient teachings normalizer that linked the same heals twice when it reran, doubling the attributed healing, and lifecycles buffs that expired unused not being counted as wasted
 
+{{<screenshot src="yulon-timeline.png" alt="invoke yu'lon breakdowns from the cooldowns revamp" />}}
+
+{{<screenshot src="conduit-timeline.png" alt="celestial conduit breakdowns" />}}
+
+{{<screenshot src="rem-graph.png" alt="renewing mist graph" />}}
+
 heart of the jade serpent's analysis comes down to two numbers per spell. while the buff is up, each spell on cooldown gains extra cooldown reduction, and any spell that was already ready wastes what it could have gained. the extra reduction, divided by the spell's normal cooldown, is the number of extra casts:
 
 ```ts
@@ -82,6 +90,8 @@ private extraCasts(spellId: number, cdrMap = this.totalExtraCdrMs): number {
   return cdr / baseCd;
 }
 ```
+
+{{<screenshot src="hero-statistics.png" alt="hero talent statistics, with heart of the jade serpent's extra casts" />}}
 
 the ancient teachings fix was a guard at the top of the normalizer. the analysis can run more than once on the same events, for example when you change a filter, and without the guard every rerun linked the heals again:
 

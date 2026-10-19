@@ -32,6 +32,8 @@ every tuesday the realms go down for maintenance, and every so often they go dow
 
 the bot's own discord status shows the count, like "Watching 83/83 US realms up". `/status` gives a region summary, or details for one realm: population, queue, and which realms it's connected to.
 
+{{<screenshot src="status.png" alt="/status with a region summary and watched realms" />}}
+
 ## how it works
 
 ### polling
@@ -57,6 +59,8 @@ api failures aren't alerts on their own. a single failed request is common and m
 ### maintenance
 
 blizzard has no api for maintenance, so the warnings follow the usual schedule: tuesday at 7am pacific for us realms. the bot reads the clock in the maintenance time zone, so daylight saving time is handled without extra code, and each warning is tracked by week so it only posts once.
+
+{{<screenshot src="maintenance.png" alt="weekly maintenance: realms going down together, then the all-clear" />}}
 
 the time until maintenance is counted in minutes since the start of the week, wrapped around so it's never negative:
 
