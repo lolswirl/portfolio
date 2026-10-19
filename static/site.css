@@ -221,6 +221,28 @@ h2.label,
   margin-top: 1.75rem;
 }
 
+/* a heading jumped to from a link flashes, then stays in the accent while it's the target */
+.body :is(h2, h3) {
+  scroll-margin-top: 1.5rem;
+}
+
+.body :is(h2, h3):target {
+  color: var(--primary-color);
+  animation: target-flash 1.6s ease-out;
+}
+
+@keyframes target-flash {
+  from {
+    background: color-mix(in srgb, var(--primary-color) 25%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body :is(h2, h3):target {
+    animation: none;
+  }
+}
+
 /* heading style, picked by `delimiter` in config.toml: applies to homepage
    section labels and ## headings, and ### headings repeat the delimiter
    (default "" keeps ## / ###) */
