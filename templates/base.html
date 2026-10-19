@@ -8,14 +8,23 @@
     {% elif section?.title and current_path != "/" %}
         {% set title = section.title ~ " | " ~ config.title %}
     {% else %}
-        {% set title = config.title %}
+        {% set title = config.extra.home_title | default(value=config.title) %}
+    {% endif %}
+    {% if page?.description %}
+        {% set description = page.description %}
+    {% elif section?.description %}
+        {% set description = section.description %}
+    {% else %}
+        {% set description = config.description %}
     {% endif %}
     <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}" />
     <meta property="og:title" content="{{ title }}" />
-    {% if page?.description %}
-        <meta name="description" content="{{ page.description }}" />
-        <meta property="og:description" content="{{ page.description }}" />
-    {% endif %}
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:site_name" content="{{ config.title }}" />
+    <meta property="og:type" content="{% if page %}article{% else %}website{% endif %}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#73ff48" />
     <link rel="icon" type="image/svg+xml" href="{{ get_url(path=config.extra.favicon) }}" />
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />

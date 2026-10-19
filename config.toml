@@ -1,6 +1,7 @@
 base_url = "https://rshevchenko.com"
 
 title = "shevchenko."
+description = "ronald shevchenko. software engineer in nyc. c++ and python, trading systems at macquarie, side projects in typescript and lua."
 taxonomies = [{ name = "tags" }]
 
 minify_html = true
@@ -15,6 +16,8 @@ dark_theme = "banner-swirl"
 
 [extra]
 favicon = "/icons/favicon.svg"
+# browser tab and link preview title on the homepage (other pages use "page | title")
+home_title = "ronald shevchenko."
 # heading style for ## and ###: a (~/exp, ~/../xyz), b (:: exp, ::: xyz), c ([exp], [[xyz]]),
 # d (exp ───, xyz ┄┄┄), e (exp., xyz..), f (𖦹 exp, 𖦹𖦹 xyz), no entry ie "" defaults (## exp, ### xyz)
 delimiter = "b"
