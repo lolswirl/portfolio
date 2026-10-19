@@ -129,7 +129,7 @@ if (tocLinks.length) {
     markCurrent();
 }
 
-// homepage title types in like a terminal, ending on a blinking cursor
+// homepage title types in like a terminal, then the cursor and the dot trade places a few times
 if (document.documentElement.classList.contains("typing")) {
     var title = document.querySelector(".home .page-header");
     var text = title.textContent + ".";
@@ -155,9 +155,16 @@ if (document.documentElement.classList.contains("typing")) {
         var timer = setInterval(function () {
             chars[typedCount].classList.remove("pending");
             chars[typedCount].after(cursor);
-            if (++typedCount === chars.length) {
+            if (++typedCount === chars.length - 1) {
                 clearInterval(timer);
-                cursor.classList.add("done");
+                var dot = chars[typedCount];
+                var swaps = 0;
+                var swap = setInterval(function () {
+                    var showDot = swaps % 2 === 0;
+                    cursor.classList.toggle("off", showDot);
+                    dot.classList.toggle("pending", !showDot);
+                    if (++swaps === 5) clearInterval(swap);
+                }, 500);
             }
         }, 40);
     }, 300);
