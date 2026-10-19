@@ -327,6 +327,28 @@ img {
   border-radius: 0.5rem;
 }
 
+/* screenshots with a caption */
+.screenshot {
+  width: fit-content;
+  max-width: 100%;
+  margin: 1em auto;
+}
+
+.screenshot img {
+  display: block;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  background-color: var(--bg-1);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.screenshot figcaption {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+
 table {
   border-collapse: collapse;
 }
@@ -751,7 +773,9 @@ code {
 pre {
   position: relative;
   background-color: var(--bg-1) !important;
-  border-left: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
+  border-left-width: 2px;
+  border-radius: 4px;
   line-height: 1.4;
   padding: 1em;
   /* long lines wrap instead of scrolling sideways */
@@ -942,7 +966,7 @@ pre.giallo code {
 .tool-card {
   display: block;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
   transition: border-color 0.15s;
 }
