@@ -913,6 +913,40 @@ a.row-desc {
   color: var(--primary-color);
 }
 
+/* addon rows (addon component): links on the right, description below */
+.addon {
+  padding: 0.3rem 0;
+}
+
+.addon .row {
+  padding: 0;
+}
+
+.addon .row-title {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* links match the homepage misc rows */
+.addon .row-ext {
+  margin-left: auto;
+  color: var(--text-1);
+  font-size: 0.9em;
+}
+
+.addon .row-ext a {
+  border-bottom: none;
+}
+
+.addon .row-ext a + a {
+  margin-left: 0.75ch;
+}
+
+.addon-more {
+  margin: 0.15rem 0 0 2ch;
+  color: var(--text-1);
+}
+
 /* stack labels share one width */
 .stack-label {
   width: 6ch;

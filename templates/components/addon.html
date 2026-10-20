@@ -1,0 +1,4 @@
+{# a row with the name and links, and the description on a line below. one line, so markdown leaves it alone #}
+{% component addon(name: string, curseforge: string = "", wago: string = "", github: string = "") %}
+<li class="addon"><div class="row"><span class="row-title">{{ name }}</span>{% if curseforge or wago or github %}<span class="row-ext">{% if curseforge %}<a href="https://www.curseforge.com/wow/addons/{{ curseforge }}" target="_blank" rel="noopener" title="curseforge">cf ↗</a>{% endif %}{% if wago %}<a href="https://addons.wago.io/addons/{{ wago }}" target="_blank" rel="noopener" title="wago">wago ↗</a>{% endif %}{% if github %}<a href="{{ github }}" target="_blank" rel="noopener" title="github">gh ↗</a>{% endif %}</span>{% endif %}</div><div class="addon-more">{{ body | markdown(inline=true) | safe }}</div></li>
+{% endcomponent addon %}
