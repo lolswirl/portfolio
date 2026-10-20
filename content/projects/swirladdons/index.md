@@ -24,12 +24,14 @@ a collection of small world of warcraft addons. most started because something i
 
 these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) and [wago](https://addons.wago.io/user/Swirl), with source on [github](https://github.com/swirladdons).
 
-- **[dispel on cursor](https://github.com/swirladdons/dispeloncursor):** shows your dispel's cooldown next to your mouse cursor. it finds whichever dispel your spec knows, so it works for every class that has one without any setup
-- **[flat tire](https://github.com/swirladdons/flattire):** shows a countdown in the middle of the screen when your movement ability is on cooldown, like "NO ROLL (4.2)". each class has its own list of abilities and short names
-- **[keystone info](https://github.com/swirladdons/keystoneinfo):** cleans up the mythic+ panel. each dungeon icon gets a short name (like SEAT or SKY), and the key level and score are resized and repositioned so they're readable
-- **[swirlui core](https://github.com/swirladdons/swirluicore):** the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/)
-- **[swirlui media](https://github.com/swirladdons/swirlmedia):** fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders
-- **[dump truck](https://github.com/swirladdons/dumptruck):** right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. it builds its window on swirlui core
+<ul class="rows">
+{%<addon name="dispel on cursor" curseforge="dispel-on-cursor" wago="dispel-on-cursor" github="https://github.com/swirladdons/dispeloncursor">%}shows your dispel's cooldown next to your mouse cursor. it finds whichever dispel your spec knows, so it works for every class that has one without any setup{%</addon>%}
+{%<addon name="flat tire" curseforge="no-movement-left" wago="flattire" github="https://github.com/swirladdons/flattire">%}shows a countdown in the middle of the screen when your movement ability is on cooldown, like "NO ROLL (4.2)". each class has its own list of abilities and short names{%</addon>%}
+{%<addon name="keystone info" curseforge="keystone-info" wago="keystone-info" github="https://github.com/swirladdons/keystoneinfo">%}cleans up the mythic+ panel. each dungeon icon gets a short name (like SEAT or SKY), and the key level and score are resized and repositioned so they're readable{%</addon>%}
+{%<addon name="swirlui core" curseforge="swirlui-core" wago="swirlui" github="https://github.com/swirladdons/swirluicore">%}the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/){%</addon>%}
+{%<addon name="swirlui media" curseforge="swirl-media" wago="swirl-media" github="https://github.com/swirladdons/swirlmedia">%}fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders{%</addon>%}
+{%<addon name="dump truck" github="https://github.com/swirladdons/dumptruck">%}right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. it builds its window on swirlui core{%</addon>%}
+</ul>
 
 dispel on cursor and flat tire both have the same readme: no config, plug and play.
 
@@ -76,10 +78,12 @@ return abbreviated:upper()
 
 these i wrote for myself and haven't published.
 
-- **dude, where's my lust?:** a big shaking "LUST?!?!?!" when a boss pull starts and nobody has used bloodlust. it only shows for classes that can cast it, and it checks for the debuff that means lust was already used
-- **lifebloom tracker:** for restoration druids. it finds who has your lifebloom, and shows its stacks, time left, and a warning with a sound once it's close enough to expiring that refreshing it won't waste any duration
-- **loot frame:** a list of what you just looted: items, gold, currency, reputation, and honor. it can show auction prices from auctionator or tsm, show how many you already own, and play a sound for expensive drops
-- **character stats:** a replacement for the character panel's stats, with its own tabs for stats, equipment, and titles
+<ul class="rows">
+{%<addon name="dude, where's my lust?">%}a big shaking "LUST?!?!?!" when a boss pull starts and nobody has used bloodlust. it only shows for classes that can cast it, and it checks for the debuff that means lust was already used{%</addon>%}
+{%<addon name="lifebloom tracker">%}for restoration druids. it finds who has your lifebloom, and shows its stacks, time left, and a warning with a sound once it's close enough to expiring that refreshing it won't waste any duration{%</addon>%}
+{%<addon name="loot frame">%}a list of what you just looted: items, gold, currency, reputation, and honor. it can show auction prices from auctionator or tsm, show how many you already own, and play a sound for expensive drops{%</addon>%}
+{%<addon name="character stats">%}a replacement for the character panel's stats, with its own tabs for stats, equipment, and titles{%</addon>%}
+</ul>
 
 ## stack
 
