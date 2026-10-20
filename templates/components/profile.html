@@ -1,0 +1,4 @@
+{# a discord-style profile card: banner, avatar with a status dot over its edge, and a label #}
+{% component profile(banner: string, avatar: string, status: string, label: string, alt: string = "") %}
+<figure class="profile"><img class="profile-banner" src="{{ banner }}" alt="{{ alt }}" /><div class="profile-avatar"><img src="{{ avatar }}" alt="" /><span class="profile-status {{ status }}" title="{{ status }}"></span></div><figcaption>{{ label }}</figcaption></figure>
+{% endcomponent profile %}

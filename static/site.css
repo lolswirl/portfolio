@@ -504,6 +504,97 @@ img {
   color: var(--text-2);
 }
 
+/* discord-style profile cards (hearthbeat) */
+.profiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 1em 0;
+}
+
+.profile {
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--bg-1);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.profile-banner {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1360 / 480;
+}
+
+/* avatar sits half over the banner, ringed in the card color like discord */
+.profile-avatar {
+  position: relative;
+  width: 28%;
+  margin: -14% 0 0 0.6rem;
+}
+
+.profile-avatar img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  border: 4px solid var(--bg-1);
+  border-radius: 50%;
+  background-color: var(--bg-1);
+  image-rendering: pixelated;
+}
+
+.profile-status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 28%;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  border: 3px solid var(--bg-1);
+  border-radius: 50%;
+}
+
+.profile-status.online { background-color: #23a55a; }
+.profile-status.idle { background-color: #f0b232; }
+.profile-status.dnd { background-color: #f23f43; }
+
+/* idle crescent and dnd bar, cut out in the card color */
+.profile-status.idle::after,
+.profile-status.dnd::after {
+  content: "";
+  position: absolute;
+  background-color: var(--bg-1);
+}
+
+.profile-status.idle::after {
+  top: -10%;
+  left: -10%;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+}
+
+.profile-status.dnd::after {
+  top: 40%;
+  left: 20%;
+  width: 60%;
+  height: 20%;
+  border-radius: 2px;
+}
+
+.profile figcaption {
+  padding: 0.35rem 0.6rem 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-2);
+}
+
+@media (max-width: 600px) {
+  .profiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 table {
   border-collapse: collapse;
 }
