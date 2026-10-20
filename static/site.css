@@ -44,6 +44,27 @@ html {
   font-family: var(--text-font);
   font-size: var(--font-size-base);
   line-height: var(--line-height);
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-2) transparent;
+}
+
+/* scrollbar for safari, which ignores scrollbar-color */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
 }
 
 /* accent outline for keyboard focus only */
