@@ -1,6 +1,6 @@
 +++
 title = "hearthbeat"
-description = "a discord bot (formerly servers up) that watches world of warcraft realm status and posts when realms go down or come back up. runs on a raspberry pi and updates itself from github."
+description = "a discord bot that watches world of warcraft realm status and posts when realms go down or come back up. runs on a raspberry pi and updates itself from github."
 weight = 5
 date = 2026-10-12
 
@@ -11,7 +11,7 @@ tags = ["javascript", "node", "discord", "raspberry-pi", "wow"]
 blurb = "discord bot for wow realm status, running on a raspberry pi"
 read_time = true
 # drop a screenshot in this folder and uncomment (path is section-relative):
-# local_image = "servers-up/screenshot.png"
+# local_image = "hearthbeat/screenshot.png"
 tags = ["javascript", "node", "discord"]
 github = "https://github.com/lolswirl/hearthbeat"
 +++
@@ -20,7 +20,7 @@ github = "https://github.com/lolswirl/hearthbeat"
 
 every tuesday the realms go down for maintenance, and every so often they go down when they aren't supposed to. either way, the question in discord is the same: are servers up yet?
 
-**hearthbeat**, the discord bot, answers that. it started out as servers up and was renamed. it checks realm status through blizzard's api every minute and posts when something changes.
+**hearthbeat**, the discord bot, answers that. it checks realm status through blizzard's api every minute and posts when something changes.
 
 ## what it posts
 
