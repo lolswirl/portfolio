@@ -38,11 +38,11 @@ the bot's own discord status shows the count, like "Watching 83/83 US realms up"
 
 the bot's avatar and banner change with the region, the same way its status dot does:
 
-| realms | avatar | banner |
-| --- | --- | --- |
-| all up | <img src="avatar-active.png" width="64" alt="active creaking heart"> | <img src="banner-active.png" width="300" alt="steady pulse"> |
-| some down | <img src="avatar-dormant.png" width="64" alt="dormant creaking heart"> | <img src="banner-dormant.png" width="300" alt="weak pulse"> |
-| all down | <img src="avatar-inactive.png" width="64" alt="inactive creaking heart"> | <img src="banner-inactive.png" width="300" alt="flatline"> |
+<div class="profiles">
+{{<profile banner="banner-active.png" avatar="avatar-active.png" status="online" label="all up" alt="steady pulse" />}}
+{{<profile banner="banner-dormant.png" avatar="avatar-dormant.png" status="idle" label="some down" alt="weak pulse" />}}
+{{<profile banner="banner-inactive.png" avatar="avatar-inactive.png" status="dnd" label="all down" alt="flatline" />}}
+</div>
 
 the avatar is minecraft's creaking heart, which already has three states of its own, and the banner is a pixel heart monitor drawn to match it.
 
