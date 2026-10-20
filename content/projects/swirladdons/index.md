@@ -24,11 +24,11 @@ a collection of small world of warcraft addons. most started because something i
 
 these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) and [wago](https://addons.wago.io/user/Swirl), with source on [github](https://github.com/swirladdons).
 
-- **[dispel on cursor](https://www.curseforge.com/wow/addons/dispel-on-cursor):** shows your dispel's cooldown next to your mouse cursor. it finds whichever dispel your spec knows, so it works for every class that has one without any setup
-- **[flat tire](https://www.curseforge.com/wow/addons/no-movement-left):** shows a countdown in the middle of the screen when your movement ability is on cooldown, like "NO ROLL (4.2)". each class has its own list of abilities and short names
-- **[keystone info](https://www.curseforge.com/wow/addons/keystone-info):** cleans up the mythic+ panel. each dungeon icon gets a short name (like SEAT or SKY), and the key level and score are resized and repositioned so they're readable
-- **[swirlui core](https://www.curseforge.com/wow/addons/swirlui-core):** the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/)
-- **[swirlui media](https://www.curseforge.com/wow/addons/swirl-media):** fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders
+- **[dispel on cursor](https://github.com/swirladdons/dispeloncursor):** shows your dispel's cooldown next to your mouse cursor. it finds whichever dispel your spec knows, so it works for every class that has one without any setup
+- **[flat tire](https://github.com/swirladdons/flattire):** shows a countdown in the middle of the screen when your movement ability is on cooldown, like "NO ROLL (4.2)". each class has its own list of abilities and short names
+- **[keystone info](https://github.com/swirladdons/keystoneinfo):** cleans up the mythic+ panel. each dungeon icon gets a short name (like SEAT or SKY), and the key level and score are resized and repositioned so they're readable
+- **[swirlui core](https://github.com/swirladdons/swirluicore):** the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/)
+- **[swirlui media](https://github.com/swirladdons/swirlmedia):** fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders
 - **[dump truck](https://github.com/swirladdons/dumptruck):** right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. it builds its window on swirlui core
 
 dispel on cursor and flat tire both have the same readme: no config, plug and play.
