@@ -29,6 +29,7 @@ these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) 
 - **[keystone info](https://www.curseforge.com/wow/addons/keystone-info):** cleans up the mythic+ panel. each dungeon icon gets a short name (like SEAT or SKY), and the key level and score are resized and repositioned so they're readable
 - **[swirlui core](https://www.curseforge.com/wow/addons/swirlui-core):** the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/)
 - **[swirlui media](https://www.curseforge.com/wow/addons/swirl-media):** fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders
+- **[dump truck](https://github.com/swirladdons/dumptruck):** right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. it builds its window on swirlui core
 
 dispel on cursor and no movement left both have the same readme: no config, plug and play.
 
