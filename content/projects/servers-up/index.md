@@ -1,6 +1,6 @@
 +++
-title = "servers up"
-description = "a discord bot that watches world of warcraft realm status and posts when realms go down or come back up. runs on a raspberry pi and updates itself from github."
+title = "hearthbeat"
+description = "a discord bot (formerly servers up) that watches world of warcraft realm status and posts when realms go down or come back up. runs on a raspberry pi and updates itself from github."
 weight = 5
 date = 2026-10-12
 
@@ -13,24 +13,26 @@ read_time = true
 # drop a screenshot in this folder and uncomment (path is section-relative):
 # local_image = "servers-up/screenshot.png"
 tags = ["javascript", "node", "discord"]
-github = "https://github.com/lolswirl/serversup"
+github = "https://github.com/lolswirl/hearthbeat"
 +++
 
 ## intro
 
 every tuesday the realms go down for maintenance, and every so often they go down when they aren't supposed to. either way, the question in discord is the same: are servers up yet?
 
-**server's up**, the discord bot, answers that. it checks realm status through blizzard's api every minute and posts when something changes.
+**hearthbeat**, the discord bot, answers that. it started out as servers up and was renamed. it checks realm status through blizzard's api every minute and posts when something changes.
 
 ## what it posts
 
-- **region-wide changes:** when at least half the realms in a region flip at once, it posts one message instead of hundreds, and names any realms you're watching
+- **region-wide changes:** when the share of realms that are down crosses a threshold (half by default), it posts one message instead of hundreds, even if they went down in waves, and names any realms you're watching
 - **all realms up:** when the last realm that was down comes back
 - **watched realms:** a realm on your watch list going down or coming back, with a note if there's a login queue
 - **maintenance warnings:** an hour and 15 minutes before the weekly maintenance window
 - **status unavailable:** when blizzard's api fails three polls in a row. it posts once, then stays quiet until a poll succeeds
 
 the bot's own discord status shows the count, like "Watching 83/83 US realms up". `/status` gives a region summary, or details for one realm: population, queue, and which realms it's connected to.
+
+the bot's avatar and banner follow the same count: an active creaking heart and steady pulse when every realm is up, dormant with a weak pulse when some are down, and inactive with a flatline when all are down.
 
 {{<screenshot src="status.png" alt="/status with a region summary and watched realms" />}}
 
@@ -40,12 +42,13 @@ the bot's own discord status shows the count, like "Watching 83/83 US realms up"
 
 blizzard groups realms into connected realms that share a status. the api has a search endpoint that returns every connected realm in a region, up to a thousand per page, so a full poll is one or two requests.
 
-each poll is compared to the last one. realms that changed status are sorted into went down and came up, and the share of the region that changed decides whether it's one region-wide alert or individual ones for watched realms:
+each poll is compared to the last one. realms that changed status are sorted into went down and came up, and whether the share of the region that is down crosses the threshold decides whether it's one region-wide alert or individual ones for watched realms:
 
 ```js
 // Region-wide events (maintenance / big outage): one message instead of hundreds
-const massDown = wentDown.length / total >= cfg.massThreshold;
-const massUp = cameUp.length / total >= cfg.massThreshold;
+const nowRegionDown = s.down / total >= cfg.massThreshold;
+const massDown = nowRegionDown && !regionDown;
+const massUp = !nowRegionDown && regionDown;
 
 if (massDown) await post(alerts.massDown(wentDown, s), true);
 if (massUp) await post(alerts.massUp(cameUp, s), true);
@@ -89,14 +92,14 @@ the core of the update script:
 as_user git fetch --quiet origin main
 target="$(as_user git rev-parse origin/main)"
 # Compare against the last commit that finished deploying, so a failed install is retried
-deployed="$(cat .git/servers-up-deployed 2>/dev/null || true)"
+deployed="$(cat .git/hearthbeat-deployed 2>/dev/null || true)"
 [[ "$target" == "$deployed" ]] && exit 0
 
 # Mirror GitHub exactly: local edits to tracked files are discarded, .env is untouched
 as_user git reset --hard --quiet "$target"
 as_user npm ci --omit=dev
-systemctl restart servers-up
-echo "$target" > .git/servers-up-deployed
+systemctl restart hearthbeat
+echo "$target" > .git/hearthbeat-deployed
 ```
 
 ## stack
