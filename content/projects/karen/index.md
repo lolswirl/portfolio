@@ -18,7 +18,7 @@ github = "https://github.com/lolswirl/karen"
 
 ## intro
 
-once [hearthbeat](/projects/servers-up/) was running on my raspberry pi, i wanted to see what the pi was doing without ssh-ing into it: is the bot up, which commit is it on, did the last update go through. karen is that page, and it also took over the job of deploying updates from github.
+once [hearthbeat](/projects/hearthbeat/) was running on my raspberry pi, i wanted to see what the pi was doing without ssh-ing into it: is the bot up, which commit is it on, did the last update go through. karen is that page, and it also took over the job of deploying updates from github.
 
 ## what it does
 
