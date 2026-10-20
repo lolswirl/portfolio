@@ -32,9 +32,27 @@ every tuesday the realms go down for maintenance, and every so often they go dow
 
 the bot's own discord status shows the count, like "Watching 83/83 US realms up". `/status` gives a region summary, or details for one realm: population, queue, and which realms it's connected to.
 
-the bot's avatar and banner follow the same count: an active creaking heart and steady pulse when every realm is up, dormant with a weak pulse when some are down, and inactive with a flatline when all are down.
-
 {{<screenshot src="status.png" alt="/status with a region summary and watched realms" />}}
+
+## avatar and banner
+
+the bot's avatar and banner change with the region, the same way its status dot does:
+
+| realms | avatar | banner |
+| --- | --- | --- |
+| all up | <img src="avatar-active.png" width="64" alt="active creaking heart"> | <img src="banner-active.png" width="300" alt="steady pulse"> |
+| some down | <img src="avatar-dormant.png" width="64" alt="dormant creaking heart"> | <img src="banner-dormant.png" width="300" alt="weak pulse"> |
+| all down | <img src="avatar-inactive.png" width="64" alt="inactive creaking heart"> | <img src="banner-inactive.png" width="300" alt="flatline"> |
+
+the avatar is minecraft's creaking heart, which already has three states of its own, and the banner is a pixel heart monitor drawn to match it.
+
+discord rate-limits profile edits, so both images change in a single request, and the bot remembers the state it last set. a restart doesn't spend an edit on a profile that's already right:
+
+```js
+const want = s.down === 0 ? 'active' : s.up === 0 ? 'inactive' : 'dormant';
+profile ??= await readFile(PROFILE_STATE, 'utf8').catch(() => null);
+if (profile === want || profileBusy) return;
+```
 
 ## how it works
 
