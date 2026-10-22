@@ -30,7 +30,7 @@ these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) 
 {%<addon name="keystone info" curseforge="keystone-info" wago="keystone-info" github="https://github.com/swirladdons/keystoneinfo">%}cleans up the mythic+ panel. each dungeon icon gets a short name (like SEAT or SKY), and the key level and score are resized and repositioned so they're readable{%</addon>%}
 {%<addon name="swirlui core" curseforge="swirlui-core" wago="swirlui" github="https://github.com/swirladdons/swirluicore">%}the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/){%</addon>%}
 {%<addon name="swirlui media" curseforge="swirl-media" wago="swirl-media" github="https://github.com/swirladdons/swirlmedia">%}fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders{%</addon>%}
-{%<addon name="dump truck" github="https://github.com/swirladdons/dumptruck">%}right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. it builds its window on swirlui core{%</addon>%}
+{%<addon name="dump truck" github="https://github.com/swirladdons/dumptruck">%}right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. its window is built on [swirl framework](/projects/swirl-framework/){%</addon>%}
 {%<addon name="brain freeze" github="https://github.com/swirladdons/brainfreeze">%}bonus roll history for every character: what you won, on which spec, from which boss, and at what difficulty. it reads the rolls the simulationcraft addon records, or you can paste a /simc export{%</addon>%}
 </ul>
 
@@ -82,7 +82,7 @@ these i wrote for myself and haven't published.
 <ul class="rows">
 {%<addon name="dude, where's my lust?">%}a big shaking "LUST?!?!?!" when a boss pull starts and nobody has used bloodlust. it only shows for classes that can cast it, and it checks for the debuff that means lust was already used{%</addon>%}
 {%<addon name="lifebloom tracker">%}for restoration druids. it finds who has your lifebloom, and shows its stacks, time left, and a warning with a sound once it's close enough to expiring that refreshing it won't waste any duration{%</addon>%}
-{%<addon name="loot frame">%}a list of what you just looted: items, gold, currency, reputation, and honor. it can show auction prices from auctionator or tsm, show how many you already own, and play a sound for expensive drops{%</addon>%}
+{%<addon name="receipt" github="https://github.com/swirladdons/receipt">%}a list of what you just looted: items, gold, currency, reputation, and honor. it can show auction prices from auctionator or tsm, show how many you already own, and play a sound for expensive drops{%</addon>%}
 {%<addon name="character stats">%}a replacement for the character panel's stats, with its own tabs for stats, equipment, and titles{%</addon>%}
 </ul>
 
