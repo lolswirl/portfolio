@@ -31,6 +31,7 @@ these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) 
 {%<addon name="swirlui core" curseforge="swirlui-core" wago="swirlui" github="https://github.com/swirladdons/swirluicore">%}the settings addon for my ui pack, [swirl ui](https://uipacks.wago.io/pack/swirl-ui). it handles ui scale, fonts, buff and debuff skinning, error text placement, and reskins for a few other addons. its settings window is built on [swirl framework](/projects/swirl-framework/){%</addon>%}
 {%<addon name="swirlui media" curseforge="swirl-media" wago="swirl-media" github="https://github.com/swirladdons/swirlmedia">%}fonts, textures, and sounds for the pack, including voice callouts for cooldowns. a script registers any new file dropped into its folders{%</addon>%}
 {%<addon name="dump truck" github="https://github.com/swirladdons/dumptruck">%}right-click bag items at the auction house to queue them. each one is priced at the current lowest listing, then you post them one click at a time, or bind a key to spam through the list. it builds its window on swirlui core{%</addon>%}
+{%<addon name="brain freeze" github="https://github.com/swirladdons/brainfreeze">%}bonus roll history for every character: what you won, on which spec, from which boss, and at what difficulty. it reads the rolls the simulationcraft addon records, or you can paste a /simc export{%</addon>%}
 </ul>
 
 dispel on cursor and flat tire both have the same readme: no config, plug and play.
