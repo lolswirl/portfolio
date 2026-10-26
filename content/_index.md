@@ -21,5 +21,4 @@ edu = [
 ]
 +++
 
-backend engineer in nyc who builds things constantly, at work and for fun.
-by day that's trading systems, on the side it's theorycrafting tools for world of warcraft healers, discord bots, custom keyboards, raspberry pis, among many other things. <a class="more" href="/about/">more →</a>
+backend engineer in nyc by day, hobbyist dev by night. <a class="more" href="/about/">more →</a>
