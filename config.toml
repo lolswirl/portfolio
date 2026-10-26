@@ -30,7 +30,7 @@ now_playing = true
 
 socials = [
   { name = "github", url = "https://github.com/lolswirl/", icon = "github" },
-  { name = "résumé", url = "https://rshevchenko.vercel.app", icon = "resume" },
+  { name = "résumé", url = "/resume.pdf", icon = "resume" },
   { name = "linkedin", url = "https://www.linkedin.com/in/ronald-shevchenko/", icon = "linkedin" },
   { name = "discord", url = "https://discord.com/users/188815794929401856", icon = "discord" },
   { name = "twitch", url = "https://www.twitch.tv/lolswirl", icon = "twitch" },
