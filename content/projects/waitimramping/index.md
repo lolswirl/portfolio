@@ -52,6 +52,8 @@ those five are on the front page. the rest are [analysis pages](https://waitimra
 
 some compare two spells directly, some break down how healing is distributed across a cooldown, and some plot a single value so you can see how it scales. they all use the same underlying model.
 
+one of them is the [interactions](https://waitimramping.com/analysis/interactions) page, a flowchart of which spells and talents modify which. a script reads simulationcraft's spell data, which lists the spells each effect affects, keeps the links between spells the site has data for, and adds a hand-written list for what spell data can't express. the chart stores only spell ids, so names and icons come from the site's spell data when the page loads. it has a fullscreen toggle and a hero talents toggle, and hovering a line highlights it and shows a tooltip. mistweaver has one so far, and a spec without one just says there isn't a chart for it yet.
+
 {{<screenshot src="sg-vs-docj.png" alt="sheilun's gift against dance of chi-ji, by clouds and targets" />}}
 
 {{<screenshot src="hotjs.png" alt="heart of the jade serpent's cooldown reduction turned into extra casts" />}}
@@ -205,7 +207,7 @@ that's now a scheduled claude code routine that runs every evening, and hourly o
 - checks simulationcraft for spell data changes from the last day
 - matches each change to the site's data by spell id, by alternate ids noted in the code, or by spell name, since the game sometimes stores a spell's real coefficient under a second id
 - applies a change only when the mapping is unambiguous, and lists anything else for review
-- updates the site's patch number when a new live patch is out, and adds a changelog entry
+- updates the site's patch number when a new live patch is out
 - opens or updates one pull request for me to review, and does the same for ptr data on a separate branch
 
 nothing gets merged without me reviewing it first.
