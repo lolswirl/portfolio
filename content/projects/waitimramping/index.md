@@ -52,7 +52,7 @@ those five are on the front page. the rest are [analysis pages](https://waitimra
 
 some compare two spells directly, some break down how healing is distributed across a cooldown, and some plot a single value so you can see how it scales. they all use the same underlying model.
 
-one of them is the [interactions](https://waitimramping.com/analysis/interactions) page, a flowchart of which spells and talents modify which. a script reads simulationcraft's spell data, which lists the spells each effect affects, keeps the links between spells the site has data for, and adds a hand-written list for what spell data can't express. the chart stores only spell ids, so names and icons come from the site's spell data when the page loads. it has a fullscreen toggle and a hero talents toggle, and hovering a line highlights it and shows a tooltip. mistweaver has one so far, and a spec without one just says there isn't a chart for it yet.
+one of them is the [interactions](https://waitimramping.com/analysis/interactions) page, a flowchart of which spells and talents modify which. [how it's built](#interaction-chart) is further down.
 
 {{<screenshot src="sg-vs-docj.png" alt="sheilun's gift against dance of chi-ji, by clouds and targets" />}}
 
@@ -187,6 +187,49 @@ keeping these apart separates two things that change at different rates. `calcSp
 `getSpellModifiers` returns the same chain as a list instead of a single number: each passive effect, crit, versatility, and each talent, with a label. the site uses it to show how a number was calculated, and it's the most useful debugging tool in the project, since a wrong number points straight at the modifier causing it.
 
 it's not optimized. everything is recalculated on every call, with no caching. with this little data it's still instant, but it could be structured better.
+
+### interaction chart
+
+the question the chart answers is "what does this talent actually touch?" the game doesn't list that anywhere in one place, and a spec has hundreds of spells and talents that modify each other.
+
+part of the answer is already in the data. for every spell effect, simulationcraft's dump lists the spells it affects, so a script turns each one into an arrow from the spell with the effect to the spell it changes. it then cleans the result up:
+
+- it keeps only arrows between spells the site already has data for
+- it drops arrows whose only effect is "apply aura", since that says a spell applies something but not what changes
+- it drops any spell that modifies more than six others, because a few broad modifiers bury every real link under a wall of lines
+- it merges entries with the same name into one node, except variants that have their own display name, like a statue's cast
+
+the rest can't come from spell data. procs, "after you cast x, your next y" and anything the game does in code never show up there, and a chart built only from simulationcraft came out thin: holy paladin was 11 spells and 12 links. so each spec can have a hand-written file for the missing links, chart-only nodes like crit and mastery, and a few corrections:
+
+```json
+{
+    "aliases": { "Blackout Kick (Cleave)": "Blackout Kick" },
+    "extraNodes": [
+        { "id": -1, "name": "Critical Strike", "iconUrl": "/icons/attribute_criticalstrike.svg" },
+        { "id": -3, "name": "Chi Cocoon (Yu'lon / Chi-Ji)", "spellIds": [406139, 406220] }
+    ],
+    "links": [
+        ["Thunder Focus Tea", "Renewing Mist"],
+        ["Renewing Mist", "Gust of Mists"]
+    ]
+}
+```
+
+links are written by name, as "from affects to". if an effect only happens because of a talent, the arrow goes through that talent, so hovering the spell doesn't suggest it always happens. chart-only nodes get negative ids so they can't clash with a spell id.
+
+the generated file holds only ids and links. names and icons are looked up in the site's spell data when the page loads, so renaming a spell or swapping its icon shows up in the chart without rerunning the script. the script reads the site's data files with regular expressions rather than importing them, and stops and lists any name in the hand-written file that it can't find.
+
+the layout is computed in the browser with elkjs, using a layered layout that runs left to right with orthogonal arrows:
+
+```ts
+layoutOptions: {
+    "elk.algorithm": "layered",
+    "elk.direction": "RIGHT",
+    "elk.layered.nodePlacement.strategy": "NETWORK_SIMPLEX",
+    "elk.edgeRouting": "ORTHOGONAL",
+```
+
+it holds the main thread while it works, so the page waits a moment for the loading dots to paint first. a spell that links to nothing else would be parked in a far corner, so those are moved up beside the main chart. hero talents can be hidden with a toggle, which hides their arrows too.
 
 ### validation
 
