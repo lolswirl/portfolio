@@ -328,7 +328,7 @@ h2.label,
 
 /* linked heading flash */
 .body :is(h2, h3) {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5rem;
 }
 
 .body :is(h2, h3):target {
