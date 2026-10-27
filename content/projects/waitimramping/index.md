@@ -54,6 +54,8 @@ some compare two spells directly, some break down how healing is distributed acr
 
 one of them is the [interactions](https://waitimramping.com/analysis/interactions) page, a flowchart of which spells and talents modify which. [how it's built](#interaction-chart) is further down.
 
+{{<screenshot src="interactions.png" alt="the mistweaver interaction chart, with every spell and talent as an icon and an arrow for each modifier" />}}
+
 {{<screenshot src="sg-vs-docj.png" alt="sheilun's gift against dance of chi-ji, by clouds and targets" />}}
 
 {{<screenshot src="hotjs.png" alt="heart of the jade serpent's cooldown reduction turned into extra casts" />}}
