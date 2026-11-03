@@ -46,6 +46,8 @@ so it became a website, which was also a reason in itself. my day job is backend
 {% <tool url="https://waitimramping.com/bugs" image="https://waitimramping.com/previews/bugs.png" title="Bugs" description="Track known bugs and issues by specialization"> %}{% </tool> %}
 </div>
 
+the data covers all seven healing specs: mistweaver monk, restoration druid, preservation evoker, holy and discipline priest, holy paladin and restoration shaman. each has its own spells and talents, and the hero trees for every healer are in too. the stats you enter are remembered separately for each spec, with a reset button.
+
 ### analysis pages
 
 those five are on the front page. the rest are [analysis pages](https://waitimramping.com/analysis), each answering one specific question about the math behind a spell or mechanic.
@@ -282,4 +284,4 @@ the site itself started in february 2025, and the early code looks very differen
 **top countries:** _36.6%_ united states, _9.0%_ germany, _7.4%_ france  
 **most viewed:** [bugs](https://waitimramping.com/bugs), then [when do i ramp?](https://waitimramping.com/when-do-i-ramp)  
 **codebase:** _~20k_ lines of typescript across _175_ files  
-**commits:** _933_ as of _oct 13, 2026_
+**commits:** _986_ as of _oct 29, 2026_
