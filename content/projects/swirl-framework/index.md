@@ -45,7 +45,7 @@ i wrote this to replace it, and moved instance loadouts over the same day. [swir
 
 ### embedding
 
-the framework isn't installed as its own addon. each addon that uses it lists it as an external in its packaging config, and the packager copies it into the addon's `UI` folder:
+each addon embeds its own copy: it lists the framework as an external in its packaging config, and the packager copies it into the addon's `UI` folder:
 
 ```yaml
 externals:

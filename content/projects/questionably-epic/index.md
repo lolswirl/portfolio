@@ -26,7 +26,7 @@ card_links = [
 
 it's voulk's project, and it's [open source](https://github.com/Voulk/QuestionablyEpic). most of the code is theirs. i contribute the mistweaver monk side.
 
-to do that, each spec has a model: an estimate of what a healer casts in a minute and how much each cast heals. gear changes your stats, stats change the model's output, and the difference is the item's value. if the model is wrong, every recommendation built on it is wrong too.
+to do that, each spec has a model: an estimate of what a healer casts in a minute and how much each cast heals. gear changes your stats, stats change the model's output, and the difference is the item's value.
 
 my main contribution was rebuilding that model for mistweaver.
 
@@ -38,7 +38,7 @@ the model is a cast profile: a list of spells, each with how many times per minu
 
 the old profile had mostly fixed numbers. the new one works more of them out from the build. talents that reduce cooldowns raise the cast rate of the spells they affect, talents that add procs add healing to the spells that trigger them, and the time left over goes to filler.
 
-cooldown reduction is a good example. heart of the jade serpent speeds up several cooldowns while it's active, but a spell only benefits if you actually press it sooner. renewing mist often waits for a target, and the kicks compete for global cooldowns, so each spell gets an effectiveness value for how much of the reduction turns into real casts:
+for example, heart of the jade serpent speeds up several cooldowns while it's active, but a spell only benefits if you actually press it sooner. renewing mist often waits for a target, and the kicks compete for global cooldowns, so each spell gets an effectiveness value for how much of the reduction turns into real casts:
 
 ```ts
 const HOTJS_EFFECTIVENESS: Record<string, number> = {
@@ -91,7 +91,7 @@ for (let _ = 0; _ < 30; _++) {
 
 the target is capped at what the build can actually generate, so a build can't drink stacks it never made. once the loop settles, the leftover time and mana go to filler.
 
-the result also shows whether a build generates more stacks than it can use, which means crit is worth less than it looks.
+the result also shows when a build generates more stacks than it can use, which lowers crit's value.
 
 ### cooldowns
 

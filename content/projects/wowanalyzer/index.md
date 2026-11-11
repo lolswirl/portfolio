@@ -50,7 +50,7 @@ constructor(options: Options) {
 }
 ```
 
-the links do the attribution. a spiritfont buff can come from a proc or from thunder focus tea, and by the time the analyzer sees it, a normalizer has already linked it to its source:
+the analyzer attributes healing through those links. a spiritfont buff can come from a proc or from thunder focus tea, and by the time the analyzer sees it, a normalizer has already linked it to its source:
 
 ```ts
 handleSfApply(event: ApplyBuffEvent | ApplyBuffStackEvent) {
@@ -70,7 +70,7 @@ some of what i've shipped:
 
 - **healing cooldowns revamp:** each major cooldown (the two celestials, revival, and celestial conduit) now gets a breakdown with a timeline of what was cast and which buffs were up, a table of the healing it did, and a checklist that grades the setup
 - **heart of the jade serpent:** while its buff is up, some cooldowns recover faster. the analysis measures how much faster each spell came back, converts that into extra casts, and shows how much of the bonus was wasted while a spell sat ready
-- **talent modules:** spiritfont, peaceful mending, morning breeze, and others. spiritfont is a good example: it splits the talent's healing by what triggered it, and works out how much of each boosted heal the talent itself is responsible for
+- **talent modules:** spiritfont, peaceful mending, morning breeze, and others. spiritfont splits the talent's healing by what triggered it, and works out how much of each boosted heal the talent itself is responsible for
 - **upkeep:** hero talent statistics, the tier set modules, and patch updates for 12.0.5 and 12.1
 - **bug fixes:** an ancient teachings normalizer that linked the same heals twice when it reran, doubling the attributed healing, and lifecycles buffs that expired unused not being counted as wasted
 
@@ -80,7 +80,7 @@ some of what i've shipped:
 
 {{<screenshot src="rem-graph.png" alt="renewing mist graph" />}}
 
-heart of the jade serpent's analysis comes down to two numbers per spell. while the buff is up, each spell on cooldown gains extra cooldown reduction, and any spell that was already ready wastes what it could have gained. the extra reduction, divided by the spell's normal cooldown, is the number of extra casts:
+heart of the jade serpent's analysis tracks two numbers per spell: the extra cooldown reduction each spell on cooldown gains while the buff is up, and what a spell that was already ready wasted. the extra reduction, divided by the spell's normal cooldown, is the number of extra casts:
 
 ```ts
 private extraCasts(spellId: number, cdrMap = this.totalExtraCdrMs): number {
@@ -121,9 +121,9 @@ the ability tracker fix was one of my first prs, and it was two lines. critical 
 
 **debugging from someone else's log.** bugs get reported as "this number looks wrong on my log." there's nothing to reproduce locally, so the fix starts in the raw events: first working out what the game actually did, then what the analyzer assumed.
 
-**working in a large codebase.** wowanalyzer has its own abstractions for events, normalizers, and analyzers, and every change goes through review. a good change fits the existing patterns rather than working around them.
+**working in a large codebase.** wowanalyzer has its own abstractions for events, normalizers, and analyzers, and every change goes through review, so changes need to follow those patterns.
 
-**keeping up with the game.** every patch can change how a spell works. a module that was correct last month can be quietly wrong this month, so a lot of the work is noticing that and updating it.
+**keeping up with the game.** every patch can change how a spell works and silently break a module that was correct, so a lot of the work is catching that and updating it.
 
 ## numbers
 

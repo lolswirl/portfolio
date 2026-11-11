@@ -1,6 +1,6 @@
 +++
 title = "wait, i'm ramping!"
-description = "a site full of tools to help world of warcraft healers plan, visualize, and fine-tune their healing. it includes various components such as a ramp timer calculator, a spell timeline visualizer, many tools that compare spells and cooldowns"
+description = "a site full of tools to help world of warcraft healers plan, visualize, and fine-tune their healing. it includes various components such as a ramp timer calculator, a spell timeline visualizer, and many tools that compare spells and cooldowns."
 weight = 1
 date = 2025-02-28
 
@@ -22,7 +22,7 @@ tags = ["typescript", "wow", "theorycrafting"]
 
 healing in world of warcraft is... weird, to say the least.
 
-most healers get comfortable at "i know my spells and mostly how to use them." what separates a good healer from a great one is knowing how those spells interact and using that efficiently. the catch is timing: you decide what to press seconds before you find out whether it was right.
+most healers get comfortable at "i know my spells and mostly how to use them." great healers also know how those spells interact and use that efficiently, which is hard because you decide what to press seconds before you find out whether it was right.
 
 i wanted a way to plan that ahead of time, and nothing really did it. so i built one.
 
@@ -118,7 +118,7 @@ export const calcSpellValue = (spell: spell, player: Player, type: 'damage' | 'h
 
 {% <note clickable={true} hidden={true} header="simplifying stats"> %}crit is treated as a flat multiplier on purpose. any single cast either crits or doesn't, but over many casts you crit about as often as your crit percentage, so averaging it is accurate across a fight even though it's never exactly right for one cast.
 
-the site isn't a simulation. raidbots does that properly, by running thousands of simulated fights. this site is after the expected total, and for that the average is the right number.
+raidbots runs thousands of simulated fights. this site only needs the expected total, and the average gives that directly.
 
 for most analysis pages, leaving out stats other than intellect (and the ones talents scale directly) is what makes it possible to see what a single spell contributes.{% </note> %}
 
@@ -186,19 +186,19 @@ export const calculateSpellHealing = (spell: spell, player: Player, rules: Talen
 
 keeping these apart separates two things that change at different rates. `calcSpellValue` covers what a spell does for a spec, which rarely changes. the rules cover what it does for a specific build, which changes whenever a talent does. each spec registers its own set of rules, so adding a spec means writing its rules without touching the shared code.
 
-`getSpellModifiers` returns the same chain as a list instead of a single number: each passive effect, crit, versatility, and each talent, with a label. the site uses it to show how a number was calculated, and it's the most useful debugging tool in the project, since a wrong number points straight at the modifier causing it.
+`getSpellModifiers` returns the same chain as a list instead of a single number: each passive effect, crit, versatility, and each talent, with a label. the site uses it to show how a number was calculated, and i use it to debug, since a wrong number points straight at the modifier causing it.
 
-it's not optimized. everything is recalculated on every call, with no caching. with this little data it's still instant, but it could be structured better.
+everything is recalculated on every call, with no caching. with this little data it's still instant, but it could be structured better.
 
 ### interaction chart
 
-the question the chart answers is "what does this talent actually touch?" the game doesn't list that anywhere in one place, and a spec has hundreds of spells and talents that modify each other.
+the chart shows what each talent actually touches. the game doesn't list that anywhere in one place, and a spec has hundreds of spells and talents that modify each other.
 
 part of the answer is already in the data. for every spell effect, simulationcraft's dump lists the spells it affects, so a script turns each one into an arrow from the spell with the effect to the spell it changes. it then cleans the result up:
 
 - it keeps only arrows between spells the site already has data for
 - it drops arrows whose only effect is "apply aura", since that says a spell applies something but not what changes
-- it drops any spell that modifies more than six others, because a few broad modifiers bury every real link under a wall of lines
+- it drops any spell that modifies more than six others, because a few broad modifiers add so many arrows that the chart becomes unreadable
 
 the rest can't come from spell data. procs, "after you cast x, your next y" and anything the game does in code never show up there, so each spec has a hand-written file for the missing links, chart-only nodes like crit and mastery, and a few corrections:
 
@@ -221,9 +221,7 @@ the layout is computed in the browser with elkjs, left to right with orthogonal 
 
 ### validation
 
-there's no access to the game's internal formulas, so validating means casting the spell in game and then staring very hard at the combat logs. if the site's number and the log's number don't match, something is wrong, and the question is **what.**
-
-sometimes it's my model. sometimes it's the game. tracking down those mismatches has found several small bugs in the specs themselves, the kind that never show up in a tooltip and only become visible when you have a predicted number to compare against.
+there's no access to the game's internal formulas, so validating means casting the spell in game and then staring very hard at the combat logs. if the site's number and the log's number don't match, either my model or the game is wrong. tracking down those mismatches has found several small bugs in the specs themselves, which never show up in a tooltip and only become visible when you have a predicted number to compare against.
 
 if only i could write unit tests against real data from the game. oh, the joys i'd have!
 
@@ -239,9 +237,7 @@ that's now a scheduled claude code routine that runs every evening, and hourly o
 - matches each change to the site's data by spell id, by alternate ids noted in the code, or by spell name, since the game sometimes stores a spell's real coefficient under a second id
 - applies a change only when the mapping is unambiguous, and lists anything else for review
 - updates the site's patch number when a new live patch is out
-- opens or updates one pull request for me to review, and does the same for ptr data on a separate branch
-
-nothing gets merged without me reviewing it first.
+- opens or updates one pull request, and does the same for ptr data on a separate branch. nothing merges until i review it
 
 ### history
 
