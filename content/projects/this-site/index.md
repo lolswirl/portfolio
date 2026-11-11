@@ -24,11 +24,11 @@ it's built with [zola](https://www.getzola.org/), a static site generator that s
 
 ## why it's built this way
 
-**static.** there's no server, no database, and no frontend framework. a personal site is a document, and documents can just be files.
+**static.** there's no server, no database, and no frontend framework, since a personal site doesn't need any of them.
 
-**one binary for the build.** there's no `node_modules` and no lockfile. nothing breaks because a dependency of a dependency published a bad version.
+**one binary for the build.** there's no `node_modules` and no lockfile, so a bad release from a transitive dependency can't break the build.
 
-**small.** the whole site is eleven templates, one stylesheet, and three short scripts. if something looks wrong, there's only one place it can be.
+**small.** the whole site is eleven templates, one stylesheet, and three short scripts, so there are few places to look when something breaks.
 
 ## history
 
@@ -38,9 +38,9 @@ instead of patching the theme, i replaced it with my own templates and styles.
 
 ## how it works
 
-### content as data
+### front matter
 
-the homepage is mostly data. work history, education, and the misc links live in the front matter of `content/_index.md`, and a template turns each entry into a row:
+work history, education, and the misc links on the homepage live in the front matter of `content/_index.md`, and a template turns each entry into a row:
 
 ```toml
 exp = [

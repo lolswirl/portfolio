@@ -34,9 +34,7 @@ these are on [curseforge](https://www.curseforge.com/members/lolswirl/projects) 
 {%<addon name="brain freeze" github="https://github.com/swirladdons/brainfreeze">%}bonus roll history for every character: what you won, on which spec, from which boss, and at what difficulty. it reads the rolls the simulationcraft addon records, or you can paste a /simc export{%</addon>%}
 </ul>
 
-dispel on cursor and flat tire both have the same readme: no config, plug and play.
-
-that works because each one figures out what to track on its own. dispel on cursor has a list of every class's dispels and picks the first one in your spellbook, and checks again whenever your talents change:
+dispel on cursor and flat tire need no configuration, because each one figures out what to track on its own. dispel on cursor has a list of every class's dispels and picks the first one in your spellbook, and checks again whenever your talents change:
 
 ```lua
 local function DetectDispelSpell()

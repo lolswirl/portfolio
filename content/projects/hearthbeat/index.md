@@ -22,6 +22,8 @@ every tuesday the realms go down for maintenance, and every so often they go dow
 
 **hearthbeat**, the discord bot, answers that. it checks realm status through blizzard's api every minute and posts when something changes.
 
+the name combines the hearthstone, the item every wow player uses to teleport home, with a heartbeat, since the bot keeps checking the servers' pulse.
+
 ## what it posts
 
 - **region-wide changes:** when the share of realms that are down crosses a threshold (half by default), it posts one message instead of hundreds, even if they went down in waves, and names any realms you're watching
@@ -75,7 +77,7 @@ if (massUp) await post(alerts.massUp(cameUp, s), true);
 if (!massUp && cameUp.length && s.down === 0) await post(alerts.allUp(s), true);
 ```
 
-api failures aren't alerts on their own. a single failed request is common and means nothing, so it takes three in a row before it posts anything.
+a single failed api request is common, so it takes three failures in a row before the bot posts anything.
 
 ### maintenance
 
@@ -99,7 +101,7 @@ an install script sets it up as a systemd service. it checks the node version, m
 
 a second script handles updates. it installs a systemd timer that checks github every minute, and when `main` has new commits, it resets the checkout to match, reinstalls dependencies, and restarts the bot. a push reaches the pi within about a minute, without me logging into it.
 
-two details keep the updater reliable:
+the updater handles two failure cases:
 
 - the update script lives outside the repo, so an update can't rewrite the script while it's running
 - it records the last commit that finished deploying, not just the last one it fetched, so a failed install gets retried on the next run
